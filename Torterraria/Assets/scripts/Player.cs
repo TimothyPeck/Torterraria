@@ -7,7 +7,10 @@ public class Player : MonoBehaviour
     public int baseHealth;
     public int health;
     public HealthBar healthBar;
-    private int timeSinceLastHit;
+
+    // eject
+    private float lastCollision;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +20,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Increments time since last hit
-        if (timeSinceLastHit < 2000)
-            timeSinceLastHit++;
-
         //Health regen
-        if (timeSinceLastHit > 1000 && health < baseHealth)
+        if (Time.time - lastCollision > 5 && health < baseHealth)
         {
             health++;
-            healthBar.UpdateHealthBar();
+            //TODO UNCOMMENT
+            //healthBar.UpdateHealthBar();
         }
 
         if (Input.GetKeyDown("q"))
@@ -34,18 +34,50 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            // simulate an attack temporary
+            if (Input.GetKey("left shift"))
+            {
+                if (collision.gameObject.GetComponent<Enemy>().GettingAttacked(1) == false)
+                {
+                    this.gameObject.GetComponent<movePlayer>().DamageForce(this.transform.position - collision.gameObject.transform.position);
+                }
+            }
+            else
+            {
+                PlayerHit(collision.gameObject.GetComponent<Enemy>().damage);
+                if (health <= 0)
+                {
+                    
+                }
+                else
+                {
+                    this.gameObject.GetComponent<movePlayer>().DamageForce(this.transform.position - collision.gameObject.transform.position);
+                }
+            }
+        }
+    }
+
+
     void PlayerHit(int damage)
     {
-        // Immunity after hit
-        if (timeSinceLastHit > 1000)
+        // Immunity after hit (in seconds)
+        if (Time.time - lastCollision > 1.5)
         {
             health -= damage;
-            timeSinceLastHit = 0;
+            lastCollision = Time.time;
         }
-        if (health < 0)
+        if (health <= 0)
         {
             print("Dead");
+            gameObject.transform.position = new Vector2(8, -0.5f);
+            health = baseHealth;
         }
-        healthBar.UpdateHealthBar();
+        Debug.Log(health);
+        //TODO UNCOMMENT
+        //healthBar.UpdateHealthBar();
     }
 }
