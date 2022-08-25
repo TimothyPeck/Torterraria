@@ -328,6 +328,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1666045406596736253, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
   m_PrefabInstance: {fileID: 51127603}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &945852474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6738218920849645087, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
+  m_PrefabInstance: {fileID: 1328894648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1069999559
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,6 +430,23 @@ MonoBehaviour:
   stoneType: {fileID: 84524310}
   ironType: {fileID: 1687856686}
   woodType: {fileID: 933944498}
+--- !u!114 &1133117640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133117632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9b33f50fd6aef49a6d557203b2f5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesClones:
+  - {fileID: 4430779125540845843, guid: 148a6052d1bd57441a252e283b167fab, type: 3}
+  - {fileID: 8727459184546050248, guid: e4d5590d51adaca42be19cbd75332658, type: 3}
+  - {fileID: 9111482577070783065, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
+  player: {fileID: 945852474}
 --- !u!1001 &1328894648
 PrefabInstance:
   m_ObjectHideFlags: 0
