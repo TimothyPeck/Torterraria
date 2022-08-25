@@ -64,12 +64,20 @@ public class TerrainGeneration : MonoBehaviour
                 usedX.Add(xPosition);
             }
         }
+
+        GameObject back = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        back.GetComponent<Renderer>().enabled = false;
+        back.transform.parent = groundTransform;
+        back.transform.position = new Vector3(0, 0, 1f);
+        back.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
+        back.transform.localScale = new Vector3(100f, 100f, 100f);
+        back.name = "backPlane";
+
         GameObject bedrock = GameObject.CreatePrimitive(PrimitiveType.Cube);
         bedrock.transform.parent = groundTransform;
-        bedrock.name = "bedrock" + GameManager.cpt;
-        GameManager.cpt++;
+        bedrock.name = "bedrock";
         bedrock.GetComponent<MeshRenderer>().material.color = Color.black;
-        bedrock.transform.localScale = new Vector3(GameManager.WIDTH, 1, 1);
+        bedrock.transform.localScale = new Vector3(2 * GameManager.WIDTH, 1, 1);
         bedrock.transform.position = new Vector3(0, -GameManager.HEIGHT, 0f);
 
         GameObject ceiling = GameObject.CreatePrimitive(PrimitiveType.Cube);

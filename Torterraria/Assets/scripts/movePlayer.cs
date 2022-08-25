@@ -5,7 +5,8 @@ using static UnityEditorInternal.VersionControl.ListControl;
 
 public class movePlayer : MonoBehaviour
 {
-    private float moveSpeed = 5f;
+    public float baseSpeed = 5f;
+    private float moveSpeed;
     private Vector3 moveVector;
     private Rigidbody rb;
     public float buttonTime = 0.3f;
@@ -20,6 +21,7 @@ public class movePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveSpeed = baseSpeed;
         rb = GetComponent<Rigidbody>();
         moveVector = new Vector3(0, 0, 0);
     }
@@ -40,20 +42,22 @@ public class movePlayer : MonoBehaviour
             collisionForce = collisionDirection * (ejectDuration - Time.time + lastCollision) / ejectDuration;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) <= 0.5f)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
         }
-        moveVector.x = moveSpeed * Input.GetAxisRaw("Horizontal") + collisionForce.x;
-        if(collisionForce.y > 0)
+
+        moveVector.x = moveSpeed * Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            moveVector.y = collisionForce.y;
+            moveSpeed = baseSpeed * 2;
         }
         else
         {
-            moveVector.y = rb.velocity.y;
+            moveSpeed = baseSpeed;
         }
-        rb.velocity = moveVector;
+        rb.velocity = new Vector3(moveVector.x, rb.velocity.y);
     }
 
     public void DamageForce(Vector2 direction)
@@ -66,5 +70,6 @@ public class movePlayer : MonoBehaviour
         collisionDirection = direction;
         lastCollision = Time.time;
     }
+
     
 }

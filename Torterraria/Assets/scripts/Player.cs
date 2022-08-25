@@ -44,6 +44,10 @@ public class Player : MonoBehaviour
                 this.gameObject.GetComponent<movePlayer>().DamageForce(this.transform.position - collision.gameObject.transform.position);
             }
         }
+        if (collision.gameObject.tag == "Item")
+        {
+            GameObject.Destroy(collision.gameObject);
+        }
     }
 
 
