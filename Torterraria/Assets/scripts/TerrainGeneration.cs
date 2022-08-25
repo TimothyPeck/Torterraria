@@ -65,6 +65,7 @@ public class TerrainGeneration : MonoBehaviour
             }
         }
 
+        // Makes a plane as the background to detect where the player clicks when a block is not available.
         GameObject back = GameObject.CreatePrimitive(PrimitiveType.Plane);
         back.GetComponent<Renderer>().enabled = false;
         back.transform.parent = groundTransform;
@@ -73,6 +74,7 @@ public class TerrainGeneration : MonoBehaviour
         back.transform.localScale = new Vector3(100f, 100f, 100f);
         back.name = "backPlane";
 
+        // Creates the bedrock layer at the bottom of the map
         GameObject bedrock = GameObject.CreatePrimitive(PrimitiveType.Cube);
         bedrock.transform.parent = groundTransform;
         bedrock.name = "bedrock";
@@ -80,6 +82,7 @@ public class TerrainGeneration : MonoBehaviour
         bedrock.transform.localScale = new Vector3(2 * GameManager.WIDTH, 1, 1);
         bedrock.transform.position = new Vector3(0, -GameManager.HEIGHT, 0f);
 
+        // Creates an invisible ceiling at the top of the map so the player cannot escape.
         GameObject ceiling = GameObject.CreatePrimitive(PrimitiveType.Cube);
         ceiling.transform.parent = groundTransform;
         ceiling.name = "ceiling" + GameManager.cpt;
@@ -89,6 +92,7 @@ public class TerrainGeneration : MonoBehaviour
         ceiling.transform.localScale = new Vector3(GameManager.WIDTH, 1, 1);
         ceiling.transform.position = new Vector3(0, GameManager.HEIGHT, 0f);
     
+        // Creates an invisible wall on the left hand side of the map so that the player may never leave.
         GameObject wallLeft=GameObject.CreatePrimitive(PrimitiveType.Cube);
         wallLeft.transform.parent = groundTransform;
         wallLeft.name = "WallLeft";
@@ -97,6 +101,7 @@ public class TerrainGeneration : MonoBehaviour
         wallLeft.transform.localScale = new Vector3(1, 1000, 1);
         wallLeft.transform.position = new Vector3(-GameManager.WIDTH - 1, 0, 0);
 
+        // Ditto
         GameObject wallRight = GameObject.CreatePrimitive(PrimitiveType.Cube);
         wallRight.transform.parent = groundTransform;
         wallRight.name = "WallRight";

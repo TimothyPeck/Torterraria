@@ -15,6 +15,7 @@ public class moveCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //moves the camera to the position of the player, offest by the defined offset
         transform.position = player.position + offset;
     }
 }
