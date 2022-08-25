@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
         if (Time.time - lastCollision > 5 && health < baseHealth)
         {
             health++;
-            //TODO UNCOMMENT
-            //healthBar.UpdateHealthBar();
+            healthBar.UpdateHealthBar();
+            lastCollision += 1;
         }
 
         if (Input.GetKeyDown("q"))
@@ -77,7 +77,6 @@ public class Player : MonoBehaviour
             health = baseHealth;
         }
         Debug.Log(health);
-        //TODO UNCOMMENT
-        //healthBar.UpdateHealthBar();
+        healthBar.UpdateHealthBar();
     }
 }
