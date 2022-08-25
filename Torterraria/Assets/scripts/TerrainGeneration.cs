@@ -69,7 +69,7 @@ public class TerrainGeneration : MonoBehaviour
         GameObject back = GameObject.CreatePrimitive(PrimitiveType.Plane);
         back.GetComponent<Renderer>().enabled = false;
         back.transform.parent = groundTransform;
-        back.transform.position = new Vector3(0, 0, 1f);
+        back.transform.position = new Vector3(0, 0, 0.5f);
         back.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
         back.transform.localScale = new Vector3(100f, 100f, 100f);
         back.name = "backPlane";
@@ -89,7 +89,7 @@ public class TerrainGeneration : MonoBehaviour
         GameManager.cpt++;
         ceiling.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         ceiling.GetComponent<Renderer>().enabled = false;
-        ceiling.transform.localScale = new Vector3(GameManager.WIDTH, 1, 1);
+        ceiling.transform.localScale = new Vector3(GameManager.WIDTH * 2, 1, 1);
         ceiling.transform.position = new Vector3(0, GameManager.HEIGHT, 0f);
     
         // Creates an invisible wall on the left hand side of the map so that the player may never leave.
