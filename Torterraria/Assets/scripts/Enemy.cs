@@ -10,12 +10,16 @@ public class Enemy : MonoBehaviour
     public float dropRate;
     public GameObject lootToDrop;
     public float secondsInDirection;
-    public GameObject player;
 
     private float speedX;
     private float timeSpent;
     private Rigidbody rb;
     private int health;
+
+    // eject
+    private Vector2 collisionDirection;
+    private float lastCollision;
+    private const float ejectDuration = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,22 +39,31 @@ public class Enemy : MonoBehaviour
             speedX *= -1;
             timeSpent -= secondsInDirection;
         }
-        float distance = gameObject.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        if (Mathf.Abs(distance) > 5f)
+
+        Vector2 collisionForce = new(0, 0);
+        if (Time.time - lastCollision < ejectDuration)
         {
-            rb.velocity = new Vector2(speedX, rb.velocity.y);
+            collisionForce = collisionDirection * (ejectDuration - Time.time + lastCollision) / ejectDuration;
+        }
+        collisionForce.y = Mathf.Max(collisionForce.y, 0);
+
+        float distance = gameObject.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x;
+        float forceY = collisionForce.y <= 0 ? rb.velocity.y : collisionForce.y;
+        if(Mathf.Abs(distance) > 30f)
+        {
+            GameObject.Destroy(gameObject);
+        }
+        else if (Mathf.Abs(distance) > 5f)
+        {
+            rb.velocity = new Vector2(speedX + collisionForce.x, forceY);
         }
         else if (Mathf.Abs(distance) > 1f)
         {
             float i = -distance / Mathf.Abs(distance);
-            rb.velocity = new Vector2(i * speed, rb.velocity.y);
+            rb.velocity = new Vector2(i * speed + collisionForce.x, forceY);
         }
-        //transform.position += moveVector * Time.deltaTime;
     }
-    void OnCollisionEnter(Collision collision)
-    {
 
-    }
     public bool GettingAttacked(int damageTaken)
     {
         health -= damageTaken;
@@ -64,6 +77,8 @@ public class Enemy : MonoBehaviour
             GameObject.Destroy(gameObject);
             return true;
         }
+        collisionDirection = (this.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position) * 15;
+        lastCollision = Time.time;
         return false;
     }
 }

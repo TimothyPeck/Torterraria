@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
             {
                 GameObject.Destroy(lastClicked);
             }
+            else if(lastClicked.tag == "Enemy" && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 5 && mouseButton == 0)
+            {
+                lastClicked.GetComponent<Enemy>().GettingAttacked(1);
+            }
             if (mouseButton == 1)
             {
                 Vector3 mouse = Input.mousePosition;

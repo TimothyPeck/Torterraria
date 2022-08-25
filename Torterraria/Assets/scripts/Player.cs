@@ -38,25 +38,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            // simulate an attack temporary
-            if (Input.GetKey("left shift"))
+            PlayerHit(collision.gameObject.GetComponent<Enemy>().damage);
+            if(health > 0)
             {
-                if (collision.gameObject.GetComponent<Enemy>().GettingAttacked(1) == false)
-                {
-                    this.gameObject.GetComponent<movePlayer>().DamageForce(this.transform.position - collision.gameObject.transform.position);
-                }
-            }
-            else
-            {
-                PlayerHit(collision.gameObject.GetComponent<Enemy>().damage);
-                if (health <= 0)
-                {
-                    
-                }
-                else
-                {
-                    this.gameObject.GetComponent<movePlayer>().DamageForce(this.transform.position - collision.gameObject.transform.position);
-                }
+                this.gameObject.GetComponent<movePlayer>().DamageForce(this.transform.position - collision.gameObject.transform.position);
             }
         }
     }
