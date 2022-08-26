@@ -32,6 +32,12 @@ public class BlockBreaking : MonoBehaviour
 
                 //GameObject.Destroy(lastClicked);
             }
+            //Checks if the click object is and enemy, if yes deal damage.
+            else if (lastClicked.tag == "Enemy" && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 5 && mouseButton == 0)
+            {
+                lastClicked.GetComponent<Enemy>().GettingAttacked(1);
+            }
+
             // Checks that the clicked object is the back wall, places a block if the right mouse button is clicked.
             else if (mouseButton == 1 && lastClicked.name == "backPlane")
             {
