@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public int baseHealth;
     public int health;
     public HealthBar healthBar;
+    public Vector2 spawnPosition;
 
     // eject
     private float lastCollision;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         health = baseHealth;
+        gameObject.transform.position = spawnPosition;
     }
 
     // Update is called once per frame
@@ -38,10 +40,9 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            PlayerHit(collision.gameObject.GetComponent<Enemy>().damage);
-            if(health > 0)
+            if(PlayerHit(collision.gameObject.GetComponent<Enemy>().damage) == false)
             {
-                this.gameObject.GetComponent<movePlayer>().DamageForce(this.transform.position - collision.gameObject.transform.position);
+                gameObject.GetComponent<movePlayer>().DamageForce(transform.position - collision.gameObject.transform.position);
             }
         }
         if (collision.gameObject.tag == "Item")
@@ -51,8 +52,9 @@ public class Player : MonoBehaviour
     }
 
 
-    void PlayerHit(int damage)
+    bool PlayerHit(int damage)
     {
+        bool isDead = false;
         // Immunity after hit (in seconds)
         if (Time.time - lastCollision > 1.5)
         {
@@ -62,10 +64,11 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             print("Dead");
-            gameObject.transform.position = new Vector2(8, -0.5f);
+            gameObject.transform.position = spawnPosition;
             health = baseHealth;
+            isDead = true;
         }
-        Debug.Log(health);
         healthBar.UpdateHealthBar();
+        return isDead;
     }
 }

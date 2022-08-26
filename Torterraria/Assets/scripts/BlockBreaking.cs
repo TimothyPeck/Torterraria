@@ -26,7 +26,7 @@ public class BlockBreaking : MonoBehaviour
             // Gets the last clicked object and checks if it's part of the ground.
             // If the object is part of the ground and the mouse button used to click on it is the left one, then the block is destroyed.
             // Also checks if the object is close enough to be broken.
-            if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 6)
+            if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
             {
                 DropBlock(lastClicked);
 

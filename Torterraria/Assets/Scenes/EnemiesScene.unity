@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &175819387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1666045405465718610, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
+  m_PrefabInstance: {fileID: 1110567578}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &253104834
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb01ec2bb837fd847b94c9bd24951292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirtType: {fileID: 0}
-  stoneType: {fileID: 0}
 --- !u!1001 &502101753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,12 +291,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6738218920849645084, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
+      propertyPath: spawnPosition.x
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 6738218920849645087, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
       propertyPath: m_Name
       value: Player_Capsule
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
+--- !u!1 &597642592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1666045406596736253, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
+  m_PrefabInstance: {fileID: 1110567578}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1110567578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,6 +397,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6738218920849645079, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
   m_PrefabInstance: {fileID: 502101753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1635583645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1666045406124031140, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
+  m_PrefabInstance: {fileID: 1110567578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1635583649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635583645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0898d142fac30fb449e7639ba6f2eb64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dirtType: {fileID: 1982517330}
+  stoneType: {fileID: 1738624047}
+  ironType: {fileID: 175819387}
+  woodType: {fileID: 597642592}
 --- !u!1 &1706700487
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,3 +466,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1738624047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1666045405484945761, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
+  m_PrefabInstance: {fileID: 1110567578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1982517330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1666045405580077723, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
+  m_PrefabInstance: {fileID: 1110567578}
+  m_PrefabAsset: {fileID: 0}

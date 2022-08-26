@@ -71,7 +71,7 @@ public class movePlayer : MonoBehaviour
         }
 
         //Sets the velocity of the rigidbody to a new vector with the current move vector
-        rb.velocity = new Vector3(moveVector.x, rb.velocity.y);
+        rb.velocity = new Vector3(moveVector.x, moveVector.y);
     }
 
     public void DamageForce(Vector2 direction)
