@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
             GameHandler.EnemyKilled();
             if (Random.value < dropRate)
             {
+                GameObject.Instantiate(lootToDrop, gameObject.transform.position, Quaternion.identity);
                 Debug.Log("Loot dropped");
             }
             GameObject.Destroy(gameObject);

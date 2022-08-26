@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 575178724698023975, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
+      propertyPath: lootToDrop
+      value: 
+      objectReference: {fileID: 4208596667563132856, guid: 5b995763d764fc84880bd33ac65d6d2e, type: 3}
     - target: {fileID: 9111482577070783065, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Name
       value: Enemy1
