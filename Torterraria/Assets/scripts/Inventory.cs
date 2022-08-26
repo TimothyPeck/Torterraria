@@ -25,19 +25,16 @@ public class Inventory : MonoBehaviour
     public Sprite[] tabSprites = new Sprite[20];
 
     public static int indexRessource = -1;
+    public static int selectedRessource = 0;
+
+    public static Dictionary<string, int> RessourcesNameNumber = new Dictionary<string, int>();
+
+    public static TMP_Text text;
 
     // Private
-
-    private UnityEngine.UI.Image slot;
-
-    private TMP_Text text;
-
     private Canvas CanvasObject;
 
-    private Dictionary<string, int> RessourcesNameNumber = new Dictionary<string, int>();
-
     private int cpt = 1;
-    private int selectedRessource = 0;
 
     private bool alreadyAdded = false;
 

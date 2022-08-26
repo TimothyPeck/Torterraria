@@ -153,7 +153,7 @@ PrefabInstance:
     - target: {fileID: 1666045406124031137, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
       propertyPath: trees.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 503783262}
     - target: {fileID: 1666045406124031137, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
       propertyPath: trees.Array.data[1]
       value: 
@@ -256,6 +256,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1666045405580077723, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
   m_PrefabInstance: {fileID: 51127603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &503783262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8581710252907878385, guid: 63cfef93752ab5d4d888fd92fb415d07, type: 3}
+  m_PrefabInstance: {fileID: 676618722}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
@@ -530,10 +535,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0898d142fac30fb449e7639ba6f2eb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirtType: {fileID: 355418089}
+  woodType: {fileID: 933944498}
   stoneType: {fileID: 84524310}
   ironType: {fileID: 1687856686}
-  woodType: {fileID: 933944498}
+  grassType: {fileID: 1476445872}
+  dirtType: {fileID: 355418089}
+  legendarySwordType: {fileID: 0}
+  legendaryAxeType: {fileID: 0}
+  legendaryPickaxeType: {fileID: 0}
+  legendaryShowelType: {fileID: 0}
+  enemy1Type: {fileID: 0}
+  enemy2Type: {fileID: 0}
+  enemy3Type: {fileID: 0}
+  enemy4Type: {fileID: 0}
+  swordType: {fileID: 0}
+  axeType: {fileID: 0}
+  pickaxeType: {fileID: 0}
+  showelType: {fileID: 0}
+  plankType: {fileID: 0}
+  crownType: {fileID: 0}
 --- !u!114 &1133117640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,6 +803,11 @@ PrefabInstance:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7827305707070086305, guid: e43d32c7b011b534cb7392968f54431d, type: 3}
   m_PrefabInstance: {fileID: 1136290079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1476445872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1666045406087153469, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
+  m_PrefabInstance: {fileID: 51127603}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1510202541
 GameObject:

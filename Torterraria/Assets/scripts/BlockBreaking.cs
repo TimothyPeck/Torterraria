@@ -1,17 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class BlockBreaking : MonoBehaviour
 {
-    public GameObject dirtType = null;
+    public GameObject woodType = null;
     public GameObject stoneType = null;
     public GameObject ironType = null;
-    public GameObject woodType = null;
-    
+    public GameObject grassType = null;
+    public GameObject dirtType = null;
+    public GameObject legendarySwordType = null;
+    public GameObject legendaryAxeType = null;
+    public GameObject legendaryPickaxeType = null;
+    public GameObject legendaryShowelType = null;
+    public GameObject enemy1Type = null;
+    public GameObject enemy2Type = null;
+    public GameObject enemy3Type = null;
+    public GameObject enemy4Type = null;
+    public GameObject swordType = null;
+    public GameObject axeType = null;
+    public GameObject pickaxeType = null;
+    public GameObject showelType = null;
+    public GameObject plankType = null;
+    public GameObject crownType = null;
+
+    public Dictionary<GameObject, string>  RessourceTypes = new Dictionary<GameObject, string>();
+
     // Start is called before the first frame update
     void Start()
     {
+        RessourceTypes.Add(woodType, "wood");
+        RessourceTypes.Add(ironType, "iron");
+        RessourceTypes.Add(stoneType, "stone");
+        RessourceTypes.Add(grassType, "grass");
+        RessourceTypes.Add(dirtType, "dirt");
+        RessourceTypes.Add(legendarySwordType, "legendarySword");
+        RessourceTypes.Add(legendaryAxeType, "legendaryAxe");
+        RessourceTypes.Add(legendaryPickaxeType, "legendaryPickaxe");
+        RessourceTypes.Add(legendaryShowelType, "legendaryShowel");
+        RessourceTypes.Add(enemy1Type, "enemy1");
+        RessourceTypes.Add(enemy2Type, "enemy2");
+        RessourceTypes.Add(enemy3Type, "enemy3");
+        RessourceTypes.Add(enemy4Type, "enemy4");
+        RessourceTypes.Add(swordType, "sword");
+        RessourceTypes.Add(axeType, "axe");
+        RessourceTypes.Add(pickaxeType, "pickaxe");
+        RessourceTypes.Add(showelType,"showel");
+        RessourceTypes.Add(plankType, "plank");
+        RessourceTypes.Add(crownType, "crown");
     }
 
     // Update is called once per frame
@@ -55,36 +93,52 @@ public class BlockBreaking : MonoBehaviour
                     //Checks that the point is within the confines of the world and that the player is close enough
                     if (hit.point.x < GameManager.WIDTH && hit.point.x > -GameManager.WIDTH && hit.point.y < GameManager.HEIGHT && hit.point.y > -GameManager.HEIGHT && Vector2.Distance(hitVector, GameObject.FindGameObjectWithTag("Player").transform.position) < 6)
                     {
-                        GameObject cube;
-                        cube = GameObject.Instantiate(woodType);
-                        //if (inventory.selectedItem == BlockTypes.DIRT)
-                        //{
-                        //    cube = GameObject.Instantiate(dirtType);
-                        //}
-                        //else if (inventory.selectedItem == BlockTypes.STONE)
-                        //{
-                        //    cube = GameObject.Instantiate(stoneType);
-                        //}else if (inventory.selectedItem == BlockTypes.WOOD)
-                        //{
-                        //    cube = GameObject.Instantiate(woodType);
-                        //}
-                        //else if (inventory.selectedItem == BlockTypes.IRON)
-                        //{
-                        //    cube = GameObject.Instantiate(ironType);
-                        //}
-                        GameManager.cpt++;
-                        //Adds the tag to make it breakable
-                        cube.tag = "Ground";
-                        //Just to be safe, set the scale
-                        cube.transform.localScale = new Vector3(1, 1, 1);
-                        //Make the ground object the parent, in line with the other cubes
-                        cube.transform.parent = GameObject.Find("Ground").transform;
-                        //Rounds the position so that all the blocks are aligned correctly
-                        hitVector.x = Mathf.RoundToInt(hitVector.x);
-                        hitVector.y = Mathf.RoundToInt(hitVector.y);
-                        hitVector.z = 0;
-                        //Moves the block to the position
-                        cube.transform.position = hitVector;
+                        GameObject cube = null;
+
+                        int cpt = 0;
+                        int index = - 1;
+                        string value = null;
+                        bool isdropped = false;
+
+                        foreach (var ressource in Inventory.RessourcesNameNumber)
+                        {
+                            if(cpt == Inventory.selectedRessource)
+                            {
+                                value = ressource.Key;
+                                index = ressource.Value;
+
+                                if (RessourceTypes.FirstOrDefault(x => x.Value == ressource.Key).Key != null && Inventory.RessourcesNameNumber[value] >= 1)
+                                {
+                                    cube = GameObject.Instantiate(RessourceTypes.FirstOrDefault(x => x.Value == ressource.Key).Key);
+
+                                    isdropped = true;
+                                }
+                            }
+                            cpt++;
+                        }
+
+                        if (isdropped)
+                        {
+                            Inventory.RessourcesNameNumber[value] = index - 1;
+
+                            Inventory.text.text = Inventory.RessourcesNameNumber[value].ToString();
+
+                            isdropped = false;
+
+                            GameManager.cpt++;
+                            //Adds the tag to make it breakable
+                            cube.tag = "Ground";
+                            //Just to be safe, set the scale
+                            cube.transform.localScale = new Vector3(1, 1, 1);
+                            //Make the ground object the parent, in line with the other cubes
+                            cube.transform.parent = GameObject.Find("Ground").transform;
+                            //Rounds the position so that all the blocks are aligned correctly
+                            hitVector.x = Mathf.RoundToInt(hitVector.x);
+                            hitVector.y = Mathf.RoundToInt(hitVector.y);
+                            hitVector.z = 0;
+                            //Moves the block to the position
+                            cube.transform.position = hitVector;
+                        }
                     }
                 }
             }

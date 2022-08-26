@@ -54,16 +54,8 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Item")
         {
-            GameObject.Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.tag == "Enemy1Loot")
-        {
-            GameObject.Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.tag == "Enemy2Loot")
-        {
             // Add the item picked up to the inventory
-            int cpt = 0; 
+            int cpt = 0;
             foreach (string ressource in Inventory.RessourcesName)
             {
                 string[] collisionName = collision.gameObject.name.Split("_");
@@ -75,6 +67,15 @@ public class Player : MonoBehaviour
                 cpt++;
             }
 
+
+            GameObject.Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Enemy1Loot")
+        {
+            GameObject.Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Enemy2Loot")
+        {
             GameObject.Destroy(collision.gameObject);
         }
     }
