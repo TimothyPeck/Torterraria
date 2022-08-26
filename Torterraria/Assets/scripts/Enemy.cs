@@ -47,17 +47,21 @@ public class Enemy : MonoBehaviour
         }
         collisionForce.y = Mathf.Max(collisionForce.y, 0);
 
-        float distance = Vector2.Distance(gameObject.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
         float forceY = collisionForce.y <= 0 ? rb.velocity.y : collisionForce.y;
-        if(Mathf.Abs(distance) > 30f)
+
+        // distance between the player and the enemy
+        float distance = Vector2.Distance(gameObject.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
+
+        if(Mathf.Abs(distance) > 40f) // if too far away from the player, disappear forever
         {
+            GameHandler.EnemyKilled();
             GameObject.Destroy(gameObject);
         }
-        else if (Mathf.Abs(distance) > 8f)
+        else if (Mathf.Abs(distance) > 8f) // if close enough, run to the player
         {
             rb.velocity = new Vector2(speedX + collisionForce.x, forceY);
         }
-        else if (Mathf.Abs(distance) > 1f)
+        else if (Mathf.Abs(distance) > 1f) // if too close, don't move
         {
             float i = gameObject.transform.position.x > GameObject.FindGameObjectWithTag("Player").transform.position.x ? -1 : 1;
             rb.velocity = new Vector2(i * speed + collisionForce.x, forceY);
@@ -79,7 +83,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
         collisionDirection = (this.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position);
-        collisionDirection = collisionDirection / collisionDirection.magnitude * 20;
+        collisionDirection = collisionDirection / collisionDirection.magnitude * 12;
         lastCollision = Time.time;
         return false;
     }

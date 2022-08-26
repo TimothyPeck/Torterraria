@@ -10,6 +10,7 @@ public class movePlayer : MonoBehaviour
     private Vector3 moveVector;
     private Rigidbody rb;
     private float jumpForce = 5;
+    private Player player;
 
     // eject
     private Vector2 collisionDirection;
@@ -25,6 +26,7 @@ public class movePlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // The vector used to move the player, assigned to none so the player is not moving at the start.
         moveVector = new Vector3(0, 0, 0);
+        player = gameObject.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -44,9 +46,10 @@ public class movePlayer : MonoBehaviour
         }
 
         //Jumps if the space bar is pressed and the player is not jumping or falling.
-        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) <= 0.5f)
+        if (Input.GetKeyDown(KeyCode.Space) && player.canJump == true)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+            player.canJump = false;
         }
 
         //doubles the speed of the player if shift is held down (sprint)

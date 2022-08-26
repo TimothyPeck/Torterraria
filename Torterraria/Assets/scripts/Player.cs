@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public Vector2 spawnPosition;
 
+    public bool canJump;
+
     // eject
     private float lastCollision;
 
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
     {
         health = baseHealth;
         gameObject.transform.position = spawnPosition;
+        canJump = true;
     }
 
     // Update is called once per frame
@@ -38,6 +41,10 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.tag == "Ground")
+        {
+            canJump = true;
+        }
         if (collision.gameObject.tag == "Enemy")
         {
             if(PlayerHit(collision.gameObject.GetComponent<Enemy>().damage) == false)
