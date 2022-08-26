@@ -36,7 +36,7 @@ public class movePlayer : MonoBehaviour
             rb.transform.position = new Vector3(0, 10, 0);
         }
 
-        // calculate the forcer of the collision with an enemy
+        // calculate the force of the collision with an enemy
         Vector2 collisionForce = new(0, 0);
         if (Time.time - lastCollision < ejectDuration)
         {
@@ -60,7 +60,15 @@ public class movePlayer : MonoBehaviour
         }
 
         //Sets the x factor of the movement to the move speed times the direction. Left = -1,  Right = 1
-        moveVector.x = moveSpeed * Input.GetAxisRaw("Horizontal");
+        moveVector.x = moveSpeed * Input.GetAxisRaw("Horizontal") + collisionForce.x;
+        if (collisionForce.y > 0)
+        {
+            moveVector.y = collisionForce.y;
+        }
+        else
+        {
+            moveVector.y = rb.velocity.y;
+        }
 
         //Sets the velocity of the rigidbody to a new vector with the current move vector
         rb.velocity = new Vector3(moveVector.x, rb.velocity.y);
