@@ -62,6 +62,19 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Enemy2Loot")
         {
+            // Add the item picked up to the inventory
+            int cpt = 0; 
+            foreach (string ressource in Inventory.RessourcesName)
+            {
+                string[] collisionName = collision.gameObject.name.Split("_");
+                if (ressource == collisionName[0])
+                {
+                    Inventory.indexRessource = cpt;
+                }
+
+                cpt++;
+            }
+
             GameObject.Destroy(collision.gameObject);
         }
     }

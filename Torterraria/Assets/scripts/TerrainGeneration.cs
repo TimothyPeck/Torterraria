@@ -64,25 +64,25 @@ public class TerrainGeneration : MonoBehaviour
                     if (j < -50 && j <= UnityEngine.Random.Range(-GameManager.HEIGHT, yPosition) * 10 && xPosition / 10 <= UnityEngine.Random.Range(-GameManager.WIDTH, GameManager.WIDTH) * 100)
                     {
                         bx = GameObject.Instantiate(ironType);
-                        bx.name = "iron" + GameManager.cpt;
+                        bx.name = "iron_" + GameManager.cpt;
                     }
                     // If on ground level, make the block grass.
                     else if (j == yPosition)
                     {
                         bx = GameObject.Instantiate(grassType);
-                        bx.name = "grass" + GameManager.cpt;
+                        bx.name = "grass_" + GameManager.cpt;
                     }
                     // If the block is 50 blocks lower than the ground then the block is dirt
                     else if (j < yPosition && j > yPosition - GameManager.HEIGHT / 4)
                     {
                         bx = GameObject.Instantiate(dirtType);
-                        bx.name = "dirt" + GameManager.cpt;
+                        bx.name = "dirt_" + GameManager.cpt;
                     }
                     // If the block is lower than that, make the block stone.
                     else
                     {
                         bx = GameObject.Instantiate(stoneType);
-                        bx.name = "stone" + GameManager.cpt;
+                        bx.name = "stone_" + GameManager.cpt;
                     }
                     
                     // Adds to parent.
