@@ -20,7 +20,7 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lastSpawn + nbEnemies * 2 + 2 < Time.time)
+        if (lastSpawn + nbEnemies * 2 + 2 < Time.time && nbEnemies < 10)
         {
             // spawn enemy
             int sideSpawn = Random.value < 0.5 ? distanceToPlayer : -distanceToPlayer;
