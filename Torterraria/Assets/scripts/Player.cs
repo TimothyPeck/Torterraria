@@ -63,8 +63,8 @@ public class Player : MonoBehaviour
         }
         if (health <= 0)
         {
-            print("Dead");
-            gameObject.transform.position = spawnPosition;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+            gameObject.transform.position = GameObject.Find("Spawn").transform.position;
             health = baseHealth;
             isDead = true;
         }

@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject.Find("Spawn").transform.position = new Vector3(-WIDTH + 5, 5, 0);
+        GameObject.FindGameObjectWithTag("Player").transform.position = GameObject.Find("Spawn").transform.position;
         //CreateGround();
     }
 

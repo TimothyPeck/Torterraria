@@ -21,7 +21,7 @@ public class TerrainGeneration : MonoBehaviour
         // Gets random positions for trees.
         for(int i = 0; i < GameManager.WIDTH / 10; i++)
         {
-            treesX.Add(GetRandomNumber(-GameManager.WIDTH + treeSpacing, GameManager.WIDTH - treeSpacing));
+            treesX.Add(GetRandomNumber(-GameManager.WIDTH + treeSpacing * 2, GameManager.WIDTH - treeSpacing));
         }
         for (int i = -GameManager.WIDTH; i < GameManager.WIDTH; i++)
         {
