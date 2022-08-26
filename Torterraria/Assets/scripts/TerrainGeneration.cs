@@ -4,13 +4,37 @@ using UnityEngine;
 
 public class TerrainGeneration : MonoBehaviour
 {
+    /// <summary>
+    /// The grass type to be used
+    /// </summary>
     public GameObject grassType = null;
+    /// <summary>
+    /// The dirt type to be used
+    /// </summary>
     public GameObject dirtType = null;
+    /// <summary>
+    /// The stone type to be used
+    /// </summary>
     public GameObject stoneType = null;
+    /// <summary>
+    /// The iron type to be used
+    /// </summary>
     public GameObject ironType = null;
+    /// <summary>
+    /// The trees to be used
+    /// </summary>
     public GameObject[] trees;
+    /// <summary>
+    /// The x coordinates that have already been done, avoids overlaps
+    /// </summary>
     private List<float> usedX = new List<float>();
+    /// <summary>
+    /// The coordinates at which the trees will appear
+    /// </summary>
     private List<int> treesX = new List<int>();
+    /// <summary>
+    /// The minimum spacing between the trees
+    /// </summary>
     private int treeSpacing = 5;
 
     void Start()
@@ -19,10 +43,11 @@ public class TerrainGeneration : MonoBehaviour
         //Goes from as far left to as far right as possible
         Transform groundTransform = GameObject.Find("Ground").transform;
         // Gets random positions for trees.
-        for(int i = 0; i < GameManager.WIDTH / 10; i++)
+        for(int i = 0; i < GameManager.WIDTH / treeSpacing; i++)
         {
             treesX.Add(GetRandomNumber(-GameManager.WIDTH + treeSpacing * 2, GameManager.WIDTH - treeSpacing));
         }
+        //From max left ot max right
         for (int i = -GameManager.WIDTH; i < GameManager.WIDTH; i++)
         {
             // Gets the position of the block and centers it on the location.
@@ -118,7 +143,7 @@ public class TerrainGeneration : MonoBehaviour
         wallLeft.transform.localScale = new Vector3(1, 1000, 1);
         wallLeft.transform.position = new Vector3(-GameManager.WIDTH - 1, 0, 0);
 
-        // Ditto
+        // Ditto but right hand side
         GameObject wallRight = GameObject.CreatePrimitive(PrimitiveType.Cube);
         wallRight.transform.parent = groundTransform;
         wallRight.name = "WallRight";
@@ -128,10 +153,17 @@ public class TerrainGeneration : MonoBehaviour
         wallRight.transform.position = new Vector3(GameManager.WIDTH, 0, 0);
     }
 
+    /// <summary>
+    /// Returns a unique random number in a range <see cref="UnityEngine.Random.Range(int, int)"/>
+    /// </summary>
+    /// <param name="min">The minimum, inclusive</param>
+    /// <param name="max">The maximum, inclusive</param>
+    /// <returns></returns>
     int GetRandomNumber(int min, int max)
     {
         int value = Random.Range(min, max);
 
+        // Annoying way to stop trees from spawning in one another
         while (treesX.Contains(value) ||
             treesX.Contains(value + 1) ||
             treesX.Contains(value + 2) ||

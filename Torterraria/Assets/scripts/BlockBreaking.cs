@@ -97,9 +97,17 @@ public class BlockBreaking : MonoBehaviour
 
     void DropBlock(GameObject clickedObject)
     {
-        //Changes the tag of the block so as to not break it again
-        clickedObject.tag = "Item";
-        //Makes the block smaller -> now obtainable.
-        clickedObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        // Leaves cannot be obtained and therefor cannot be dropped
+        if (!clickedObject.name.Contains("leaves"))
+        {
+            //Changes the tag of the block so as to not break it again
+            clickedObject.tag = "Item";
+            //Makes the block smaller -> now obtainable.
+            clickedObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        }
+        else
+        {
+            GameObject.Destroy(clickedObject);
+        }
     }
 }
