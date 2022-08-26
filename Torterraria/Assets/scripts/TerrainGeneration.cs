@@ -8,13 +8,21 @@ public class TerrainGeneration : MonoBehaviour
     public GameObject dirtType = null;
     public GameObject stoneType = null;
     public GameObject ironType = null;
+    public GameObject[] trees;
     private List<float> usedX = new List<float>();
+    private List<int> treesX = new List<int>();
+    private int treeSpacing = 4;
 
     void Start()
     {
         // Modified version of https://www.youtube.com/watch?v=fHZGJuRfDUs
         //Goes from as far left to as far right as possible
         Transform groundTransform = GameObject.Find("Ground").transform;
+        // Gets random positions for trees.
+        for(int i = 0; i < GameManager.WIDTH / 10; i++)
+        {
+            treesX.Add(GetRandomNumber(-GameManager.WIDTH + treeSpacing, GameManager.WIDTH - treeSpacing));
+        }
         for (int i = -GameManager.WIDTH; i < GameManager.WIDTH; i++)
         {
             // Gets the position of the block and centers it on the location.
@@ -62,6 +70,15 @@ public class TerrainGeneration : MonoBehaviour
                 }
                 // Adds the used position so as to not use it again.
                 usedX.Add(xPosition);
+
+                //Generates a tree at the given position
+                if (treesX.Contains(xPosition))
+                {
+                    GameObject tree = GameObject.Instantiate(trees[UnityEngine.Random.Range(0, trees.Length)]);
+                    tree.name = "tree" + GameManager.cpt;
+                    tree.transform.parent = groundTransform;
+                    tree.transform.position = new Vector3(xPosition, yPosition + 1, 0);
+                }
             }
         }
 
@@ -110,4 +127,25 @@ public class TerrainGeneration : MonoBehaviour
         wallRight.transform.localScale = new Vector3(1, 1000, 1);
         wallRight.transform.position = new Vector3(GameManager.WIDTH, 0, 0);
     }
+
+    int GetRandomNumber(int min, int max)
+    {
+        int value = Random.Range(min, max);
+
+        while (treesX.Contains(value) ||
+            treesX.Contains(value + 1) ||
+            treesX.Contains(value + 2) ||
+            treesX.Contains(value + 3) ||
+            treesX.Contains(value + 4) ||
+            treesX.Contains(value - 1) ||
+            treesX.Contains(value - 2) ||
+            treesX.Contains(value - 3) ||
+            treesX.Contains(value - 4))
+        {
+            value = Random.Range(min, max);
+        }
+
+        return value;
+    }
+
 }
