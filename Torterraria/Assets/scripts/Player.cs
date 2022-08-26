@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
 
             GameObject.Destroy(collision.gameObject);
         }
+        
     }
 
     private void OnCollisionStay(Collision collision)
@@ -81,8 +82,22 @@ public class Player : MonoBehaviour
             canJump = true;
             lastGroundContact = Time.time;
         }
+        //print("collision: " + collision.gameObject.name);
+        if (collision.gameObject.name.Contains("top") && Input.GetAxisRaw("Vertical") < 0)
+        {
+            StartCoroutine(MakePlatformTraversable(.42f, collision));
+        }
     }
 
+    IEnumerator MakePlatformTraversable(float seconds, Collision collision)
+    {
+        GameObject collidedObject = collision.gameObject;
+        collidedObject.GetComponent<MeshCollider>().enabled = false;
+        yield return new WaitForSecondsRealtime(seconds);
+        collidedObject.GetComponent<MeshCollider>().enabled = true;
+    }
+
+        
 
     bool PlayerHit(int damage)
     {

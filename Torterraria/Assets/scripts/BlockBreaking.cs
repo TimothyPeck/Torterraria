@@ -30,6 +30,10 @@ public class BlockBreaking : MonoBehaviour
     public GameObject crownType = null;
 
     public Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
+    /// <summary>
+    /// The platform type to be used
+    /// </summary>
+    public GameObject platformType = null;
 
     // Start is called before the first frame update
     void Start()
@@ -165,6 +169,8 @@ public class BlockBreaking : MonoBehaviour
 
     void DropBlock(GameObject clickedObject)
     {
+        if (clickedObject.name == "front")
+            clickedObject = clickedObject.transform.parent.gameObject;
         // Leaves cannot be obtained and therefor cannot be dropped
         if (!clickedObject.name.Contains("leaves"))
         {

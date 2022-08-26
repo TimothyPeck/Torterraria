@@ -21,6 +21,10 @@ public class TerrainGeneration : MonoBehaviour
     /// </summary>
     public GameObject ironType = null;
     /// <summary>
+    /// The platform type to be used
+    /// </summary>
+    public GameObject platformType = null;
+    /// <summary>
     /// The trees to be used
     /// </summary>
     public GameObject[] trees;

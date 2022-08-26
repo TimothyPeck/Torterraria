@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Item
   - slot
+  - Platform
   layers:
   - Default
   - TransparentFX
