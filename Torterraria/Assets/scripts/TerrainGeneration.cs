@@ -11,7 +11,7 @@ public class TerrainGeneration : MonoBehaviour
     public GameObject[] trees;
     private List<float> usedX = new List<float>();
     private List<int> treesX = new List<int>();
-    private int treeSpacing = 4;
+    private int treeSpacing = 5;
 
     void Start()
     {
@@ -137,10 +137,12 @@ public class TerrainGeneration : MonoBehaviour
             treesX.Contains(value + 2) ||
             treesX.Contains(value + 3) ||
             treesX.Contains(value + 4) ||
+            treesX.Contains(value + 5) ||
             treesX.Contains(value - 1) ||
             treesX.Contains(value - 2) ||
             treesX.Contains(value - 3) ||
-            treesX.Contains(value - 4))
+            treesX.Contains(value - 4) ||
+            treesX.Contains(value - 5))
         {
             value = Random.Range(min, max);
         }
