@@ -22,7 +22,7 @@ public class GameHandler : MonoBehaviour
         {
             // spawn enemy
             int sideSpawn = Random.value < 0.5 ? 10 : -10;
-            Instantiate(enemiesClones[Random.Range(0, enemiesClones.Length)], new Vector2(player.gameObject.transform.position.x + sideSpawn, player.gameObject.transform.position.y + 4f), Quaternion.identity);
+            Instantiate(enemiesClones[Random.Range(0, enemiesClones.Length)], new Vector2(player.gameObject.transform.position.x + sideSpawn, 4f), Quaternion.identity);
             nbEnemies++;
             lastSpawn = Time.time;
         }
