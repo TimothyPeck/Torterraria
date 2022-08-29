@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class TerrainGeneration : MonoBehaviour
 {
@@ -41,8 +43,9 @@ public class TerrainGeneration : MonoBehaviour
     /// </summary>
     private int treeSpacing = 5;
 
-    void Start()
+    async void Start()
     {
+        await Task.Run(() => GameManager.FillBlocksArray());
         // Modified version of https://www.youtube.com/watch?v=fHZGJuRfDUs
         //Goes from as far left to as far right as possible
         Transform groundTransform = GameObject.Find("Ground").transform;
@@ -96,6 +99,8 @@ public class TerrainGeneration : MonoBehaviour
                     GameManager.cpt++;
                     // Moves the block to the correct location.
                     bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
+
+                    GameManager.filledPositions[xPosition + GameManager.WIDTH][yPosition + GameManager.HEIGHT] = true;
                 }
                 // Adds the used position so as to not use it again.
                 usedX.Add(xPosition);
@@ -106,7 +111,8 @@ public class TerrainGeneration : MonoBehaviour
                     GameObject tree = GameObject.Instantiate(trees[UnityEngine.Random.Range(0, trees.Length)]);
                     tree.name = "tree" + GameManager.cpt;
                     tree.transform.parent = groundTransform;
-                    tree.transform.position = new Vector3(xPosition, yPosition + 1, 0);
+                    tree.transform.localScale = new Vector3(1, 1, 0.1f);
+                    tree.transform.position = new Vector3(xPosition, yPosition + 1, 0.5f);
                 }
             }
         }
@@ -115,7 +121,7 @@ public class TerrainGeneration : MonoBehaviour
         GameObject back = GameObject.CreatePrimitive(PrimitiveType.Plane);
         back.GetComponent<Renderer>().enabled = false;
         back.transform.parent = groundTransform;
-        back.transform.position = new Vector3(0, 0, 0.5f);
+        back.transform.position = new Vector3(0, 0, 0.6f);
         back.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
         back.transform.localScale = new Vector3(100f, 100f, 100f);
         back.name = "backPlane";

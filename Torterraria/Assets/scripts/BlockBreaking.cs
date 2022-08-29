@@ -35,6 +35,8 @@ public class BlockBreaking : MonoBehaviour
     /// </summary>
     public GameObject platformType = null;
 
+    private BlockTypes selectedType = BlockTypes.PLATFORM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,9 +74,8 @@ public class BlockBreaking : MonoBehaviour
             // Also checks if the object is close enough to be broken.
             if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
             {
+                GameManager.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                 DropBlock(lastClicked);
-
-                //GameObject.Destroy(lastClicked);
             }
             //Checks if the click object is and enemy, if yes deal damage.
             else if (lastClicked.tag == "Enemy" && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 5 && mouseButton == 0)
@@ -83,6 +84,7 @@ public class BlockBreaking : MonoBehaviour
             }
 
             // Checks that the clicked object is the back wall, places a block if the right mouse button is clicked.
+            // And checks that the coordinates of the block haven't been filled already.
             else if (mouseButton == 1 && lastClicked.name == "backPlane")
             {
                 //Gets the position of the mouse click
@@ -96,8 +98,15 @@ public class BlockBreaking : MonoBehaviour
                 {
                     // The hit location transformed into a 3D vector.
                     Vector3 hitVector = hit.point;
+
+                    print(GameManager.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT]);
                     //Checks that the point is within the confines of the world and that the player is close enough
-                    if (hit.point.x < GameManager.WIDTH && hit.point.x > -GameManager.WIDTH && hit.point.y < GameManager.HEIGHT && hit.point.y > -GameManager.HEIGHT && Vector2.Distance(hitVector, GameObject.FindGameObjectWithTag("Player").transform.position) < 6)
+                    if (hit.point.x < GameManager.WIDTH &&
+                        hit.point.x > -GameManager.WIDTH &&
+                        hit.point.y < GameManager.HEIGHT &&
+                        hit.point.y > -GameManager.HEIGHT &&
+                        Vector2.Distance(hitVector, GameObject.FindGameObjectWithTag("Player").transform.position) < 6 &&
+                        GameManager.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT] == false)
                     {
                         GameObject cube = null;
 
@@ -169,8 +178,11 @@ public class BlockBreaking : MonoBehaviour
 
     void DropBlock(GameObject clickedObject)
     {
-        if (clickedObject.name == "front")
+        if (clickedObject.name == "front" || clickedObject.name == "top" || clickedObject.name == "bottom")
+        {
             clickedObject = clickedObject.transform.parent.gameObject;
+            clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, Mathf.FloorToInt(clickedObject.transform.position.y), 0);
+        }
         // Leaves cannot be obtained and therefor cannot be dropped
         if (!clickedObject.name.Contains("leaves"))
         {
@@ -178,6 +190,8 @@ public class BlockBreaking : MonoBehaviour
             clickedObject.tag = "Item";
             //Makes the block smaller -> now obtainable.
             clickedObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            if (clickedObject.transform.parent.gameObject.name.Contains("tree"))
+                clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, clickedObject.transform.position.y, 0);
         }
         else
         {

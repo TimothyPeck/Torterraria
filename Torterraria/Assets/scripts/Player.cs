@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
             lastGroundContact = Time.time;
         }
         //print("collision: " + collision.gameObject.name);
-        if (collision.gameObject.name.Contains("top") && Input.GetAxisRaw("Vertical") < 0)
+        if ((collision.gameObject.name.Contains("platform") || collision.gameObject.name.Contains("top")) && Input.GetAxisRaw("Vertical") < 0)
         {
             StartCoroutine(MakePlatformTraversable(.42f, collision));
         }

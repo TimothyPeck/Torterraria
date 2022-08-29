@@ -1,10 +1,11 @@
 using System;
 
-public enum BloackTypes
+public enum BlockTypes
 {
     DIRT,
     STONE,
     WOOD,
     IRON,
-    GRASS
+    GRASS,
+    PLATFORM
 }
