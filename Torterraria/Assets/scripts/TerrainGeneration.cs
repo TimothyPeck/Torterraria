@@ -42,10 +42,23 @@ public class TerrainGeneration : MonoBehaviour
     /// The minimum spacing between the trees
     /// </summary>
     private int treeSpacing = 5;
+    /// <summary>
+    /// 
+    /// </summary>
+    public static bool[][] filledPositions = new bool[2 * GameManager.WIDTH][];
 
-    async void Start()
+    void Start()
     {
-        await Task.Run(() => GameManager.FillBlocksArray());
+        //Fills the array of used blocks before use.
+        for (int i = -GameManager.WIDTH; i < GameManager.WIDTH; i++)
+        {
+            filledPositions[i + GameManager.WIDTH] = new bool[2 * GameManager.HEIGHT];
+            for (int j = -GameManager.HEIGHT; j < GameManager.HEIGHT; j++)
+            {
+                filledPositions[i + GameManager.WIDTH][j + GameManager.HEIGHT] = false;
+            }
+        }
+
         // Modified version of https://www.youtube.com/watch?v=fHZGJuRfDUs
         //Goes from as far left to as far right as possible
         Transform groundTransform = GameObject.Find("Ground").transform;
@@ -100,7 +113,7 @@ public class TerrainGeneration : MonoBehaviour
                     // Moves the block to the correct location.
                     bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
 
-                    GameManager.filledPositions[xPosition + GameManager.WIDTH][yPosition + GameManager.HEIGHT] = true;
+                    filledPositions[xPosition + GameManager.WIDTH][yPosition + GameManager.HEIGHT] = true;
                 }
                 // Adds the used position so as to not use it again.
                 usedX.Add(xPosition);

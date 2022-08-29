@@ -69,22 +69,23 @@ public class BlockBreaking : MonoBehaviour
         //If the player has clicked an object
         if (lastClicked != null && canvas.GetComponent<Inventory>().CanvasObject.enabled == false)
         {
-            // Gets the last clicked object and checks if it's part of the ground.
+            // Gets the last clicked object and checks if it's tagged as Ground.
             // If the object is part of the ground and the mouse button used to click on it is the left one, then the block is destroyed.
             // Also checks if the object is close enough to be broken.
             if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
             {
-                GameManager.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                print(lastClicked.transform.position.x);
+                print(TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT]);
+                TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                 DropBlock(lastClicked);
             }
-            //Checks if the click object is and enemy, if yes deal damage.
+            //Checks if the click object is an enemy, if yes deal damage.
             else if (lastClicked.tag == "Enemy" && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 5 && mouseButton == 0)
             {
                 lastClicked.GetComponent<Enemy>().GettingAttacked(1);
             }
 
             // Checks that the clicked object is the back wall, places a block if the right mouse button is clicked.
-            // And checks that the coordinates of the block haven't been filled already.
             else if (mouseButton == 1 && lastClicked.name == "backPlane")
             {
                 //Gets the position of the mouse click
@@ -99,14 +100,15 @@ public class BlockBreaking : MonoBehaviour
                     // The hit location transformed into a 3D vector.
                     Vector3 hitVector = hit.point;
 
-                    print(GameManager.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT]);
-                    //Checks that the point is within the confines of the world and that the player is close enough
+                    print(TerrainGeneration.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT]);
+                    //Checks that the point is within the confines of the world and that the player is close enough,
+                    // also checks that the coordinates of the block haven't been filled already.
                     if (hit.point.x < GameManager.WIDTH &&
                         hit.point.x > -GameManager.WIDTH &&
                         hit.point.y < GameManager.HEIGHT &&
                         hit.point.y > -GameManager.HEIGHT &&
                         Vector2.Distance(hitVector, GameObject.FindGameObjectWithTag("Player").transform.position) < 6 &&
-                        GameManager.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT] == false)
+                        TerrainGeneration.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT] == false)
                     {
                         GameObject cube = null;
 
@@ -167,6 +169,7 @@ public class BlockBreaking : MonoBehaviour
                             cube.transform.position = hitVector;
                         }
                     }
+                    print(TerrainGeneration.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT]);
                 }
             }
         }
