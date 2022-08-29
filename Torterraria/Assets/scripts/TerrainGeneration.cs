@@ -187,7 +187,7 @@ public class TerrainGeneration : MonoBehaviour
         back.transform.parent = groundTransform;
         back.transform.position = new Vector3(0, 0, 0.6f);
         back.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
-        back.transform.localScale = new Vector3(21f, 21f, 21f);
+        back.transform.localScale = new Vector3(40f, 21f, 21f);
         back.name = "backPlane";
 
         // Creates the bedrock layer at the bottom of the map
