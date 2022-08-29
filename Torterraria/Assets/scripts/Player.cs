@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         //print("collision: " + collision.gameObject.name);
         if ((collision.gameObject.name.Contains("platform") || collision.gameObject.name.Contains("top")) && Input.GetAxisRaw("Vertical") < 0)
         {
-            StartCoroutine(MakePlatformTraversable(.5f, collision));
+            StartCoroutine(MakePlatformTraversable(.7f, collision));
         }
     }
 
