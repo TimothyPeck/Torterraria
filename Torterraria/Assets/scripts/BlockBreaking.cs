@@ -175,8 +175,13 @@ public class BlockBreaking : MonoBehaviour
         clickableObj.ResetMouseButton();
     }
 
+    /// <summary>
+    /// Makes the object a pickupable item.
+    /// </summary>
+    /// <param name="clickedObject">The object that has been clicked</param>
     void DropBlock(GameObject clickedObject)
     {
+        // If it's a platform, take the parent gameObject
         if (clickedObject.name == "front" || clickedObject.name == "top" || clickedObject.name == "bottom")
         {
             clickedObject = clickedObject.transform.parent.gameObject;

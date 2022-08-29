@@ -131,12 +131,13 @@ public class TerrainGeneration : MonoBehaviour
         }
 
         // Makes a plane as the background to detect where the player clicks when a block is not available.
+        // Allows the player to place a block on nothing.
         GameObject back = GameObject.CreatePrimitive(PrimitiveType.Plane);
         back.GetComponent<Renderer>().enabled = false;
         back.transform.parent = groundTransform;
         back.transform.position = new Vector3(0, 0, 0.6f);
         back.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
-        back.transform.localScale = new Vector3(100f, 100f, 100f);
+        back.transform.localScale = new Vector3(21f, 21f, 21f);
         back.name = "backPlane";
 
         // Creates the bedrock layer at the bottom of the map
@@ -177,7 +178,7 @@ public class TerrainGeneration : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns a unique random number in a range <see cref="UnityEngine.Random.Range(int, int)"/>
+    /// Returns a unique random number in a range, uses <see cref="UnityEngine.Random.Range(int, int)"/>
     /// </summary>
     /// <param name="min">The minimum, inclusive</param>
     /// <param name="max">The maximum, inclusive</param>

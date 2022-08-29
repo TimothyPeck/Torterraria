@@ -344,8 +344,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1568766642}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -437,6 +436,42 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4142806038126979215, guid: ffa106a9b75b4ed4e80e5d355ed73450, type: 3}
   m_PrefabInstance: {fileID: 2045864750}
   m_PrefabAsset: {fileID: 0}
+--- !u!251 &914055549
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914055546}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!893571522 &914055550
+CustomCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914055546}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_CustomShapes:
+    m_Shapes: []
+    m_Vertices: []
 --- !u!1 &933944498 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1666045406596736253, guid: 17571aaddb64166418ff9148e95075eb, type: 3}
@@ -935,6 +970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568766642}
   - component: {fileID: 1568766643}
+  - component: {fileID: 1568766644}
   m_Layer: 0
   m_Name: CameraLight
   m_TagString: Untagged
@@ -949,14 +985,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568766641}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.17508456, y: 0.3723399, z: -0.071748525, w: 0.9086036}
+  m_LocalPosition: {x: 0, y: 12.34, z: -30.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 519420032}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 21.814, y: 44.567, z: 0}
 --- !u!108 &1568766643
 Light:
   m_ObjectHideFlags: 0
@@ -966,10 +1002,10 @@ Light:
   m_GameObject: {fileID: 1568766641}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 0
+  m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.9528302, g: 0.8427072, b: 0.4449537, a: 1}
+  m_Intensity: 0.68
   m_Range: 50
   m_SpotAngle: 40
   m_InnerSpotAngle: 4
@@ -1019,6 +1055,20 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1568766644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568766641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b42821f6c90834aaf7d791c32c915d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeMultiplier: 1
+  sceneLight: {fileID: 1568766641}
 --- !u!1 &1572942043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,7 +1221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3124566572507361291, guid: ffa106a9b75b4ed4e80e5d355ed73450, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4026280584393532980, guid: ffa106a9b75b4ed4e80e5d355ed73450, type: 3}
       propertyPath: m_Enabled
@@ -1269,5 +1319,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3124566572507361291, guid: ffa106a9b75b4ed4e80e5d355ed73450, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ffa106a9b75b4ed4e80e5d355ed73450, type: 3}
