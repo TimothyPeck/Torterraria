@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class BlockBreaking : MonoBehaviour
 {
+    public GameObject canvas;
+
     public GameObject woodType = null;
     public GameObject stoneType = null;
     public GameObject ironType = null;
@@ -26,40 +29,39 @@ public class BlockBreaking : MonoBehaviour
     public GameObject plankType = null;
     public GameObject crownType = null;
 
-    public Dictionary<GameObject, string>  RessourceTypes = new Dictionary<GameObject, string>();
+    public Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        RessourceTypes.Add(woodType, "wood");
-        RessourceTypes.Add(ironType, "iron");
-        RessourceTypes.Add(stoneType, "stone");
-        RessourceTypes.Add(grassType, "grass");
-        RessourceTypes.Add(dirtType, "dirt");
-        RessourceTypes.Add(legendarySwordType, "legendarySword");
-        RessourceTypes.Add(legendaryAxeType, "legendaryAxe");
-        RessourceTypes.Add(legendaryPickaxeType, "legendaryPickaxe");
-        RessourceTypes.Add(legendaryShowelType, "legendaryShowel");
-        RessourceTypes.Add(enemy1Type, "enemy1");
-        RessourceTypes.Add(enemy2Type, "enemy2");
-        RessourceTypes.Add(enemy3Type, "enemy3");
-        RessourceTypes.Add(enemy4Type, "enemy4");
-        RessourceTypes.Add(swordType, "sword");
-        RessourceTypes.Add(axeType, "axe");
-        RessourceTypes.Add(pickaxeType, "pickaxe");
-        RessourceTypes.Add(showelType,"showel");
-        RessourceTypes.Add(plankType, "plank");
-        RessourceTypes.Add(crownType, "crown");
+        RessourceTypes.Add("wood", woodType);
+        RessourceTypes.Add("iron", ironType);
+        RessourceTypes.Add("stone", stoneType);
+        RessourceTypes.Add("grass", grassType);
+        RessourceTypes.Add("dirt", dirtType);
+        RessourceTypes.Add("legendarySword", legendarySwordType);
+        RessourceTypes.Add("legendaryAxe", legendaryAxeType);
+        RessourceTypes.Add("legendaryPickaxe", legendaryPickaxeType);
+        RessourceTypes.Add("legendaryShowel", legendaryShowelType);
+        RessourceTypes.Add("enemy1", enemy1Type);
+        RessourceTypes.Add("enemy2", enemy2Type);
+        RessourceTypes.Add("enemy3", enemy3Type);
+        RessourceTypes.Add("enemy4", enemy4Type);
+        RessourceTypes.Add("sword", swordType);
+        RessourceTypes.Add("axe", axeType);
+        RessourceTypes.Add("pickaxe", pickaxeType);
+        RessourceTypes.Add("showel", showelType);
+        RessourceTypes.Add("plank", plankType);
+        RessourceTypes.Add("crown", crownType);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         GameObject lastClicked = clickableObj.GetLastClicked();
         int mouseButton = clickableObj.GetMouseButton();
         //If the player has clicked an object
-        if (lastClicked != null)
+        if (lastClicked != null && canvas.GetComponent<Inventory>().CanvasObject.enabled == false)
         {
             // Gets the last clicked object and checks if it's part of the ground.
             // If the object is part of the ground and the mouse button used to click on it is the left one, then the block is destroyed.
@@ -95,23 +97,24 @@ public class BlockBreaking : MonoBehaviour
                     {
                         GameObject cube = null;
 
+                        int index = -1;
                         int cpt = 0;
-                        int index = - 1;
-                        string value = null;
                         bool isdropped = false;
+                        string key = null;
 
                         foreach (var ressource in Inventory.RessourcesNameNumber)
                         {
-                            if(cpt == Inventory.selectedRessource)
+                            if (cpt == Inventory.selectedRessource)
                             {
-                                value = ressource.Key;
-                                index = ressource.Value;
+                                string currentKey = RessourceTypes.FirstOrDefault(x => x.Key == ressource.Key).Key;
 
-                                if (RessourceTypes.FirstOrDefault(x => x.Value == ressource.Key).Key != null && Inventory.RessourcesNameNumber[value] >= 1)
+                                if (currentKey != null && Inventory.RessourcesNameNumber[ressource.Key] >= 1)
                                 {
-                                    cube = GameObject.Instantiate(RessourceTypes.FirstOrDefault(x => x.Value == ressource.Key).Key);
-
+                                    cube = Instantiate(RessourceTypes[currentKey]);
+                                    cube.name = cube.name.Split("_")[1].Split("(")[0] + "_a";
+                                    key = ressource.Key;
                                     isdropped = true;
+                                    index = cpt;
                                 }
                             }
                             cpt++;
@@ -119,9 +122,20 @@ public class BlockBreaking : MonoBehaviour
 
                         if (isdropped)
                         {
-                            Inventory.RessourcesNameNumber[value] = index - 1;
+                            Inventory.RessourcesNameNumber[key]--;// = index - 1;
 
-                            Inventory.text.text = Inventory.RessourcesNameNumber[value].ToString();
+                            //Inventory.text.text = Inventory.RessourcesNameNumber[key].ToString();
+
+                            GameObject childPlane = canvas.GetComponent<Inventory>().tabSelection[index].transform.Find("Plane").gameObject;
+
+                            UnityEngine.UI.Image slot = childPlane.GetComponentInChildren<UnityEngine.UI.Image>();
+
+                            TMP_Text text = slot.GetComponentInChildren(typeof(TMP_Text)) as TMP_Text;
+
+                            text.text = Inventory.RessourcesNameNumber[key].ToString();
+                            
+
+
 
                             isdropped = false;
 

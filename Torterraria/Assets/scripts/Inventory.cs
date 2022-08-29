@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
     public static TMP_Text text;
 
     // Private
-    private Canvas CanvasObject;
+    public Canvas CanvasObject;
 
     private int cpt = 1;
 
@@ -86,8 +86,27 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyUp("e"))
         {
             CanvasObject.enabled = !CanvasObject.enabled;
+        }        
+    }
+
+    /// <summary>
+    /// CHange the selected item
+    /// </summary>
+    /// <param name="number"></param>
+    public void ClickedSlot(int number)
+    {
+        selectedRessource = number;
+
+        foreach (UnityEngine.UI.Image selection in tabSelection)
+        {
+            selection.enabled = false;
         }
 
+        tabSelection[number].enabled = true;
+    }
+
+    public void CollectResource()
+    {
         // Check if a ressource is picked up
 
         if (indexRessource >= 0)
@@ -132,7 +151,7 @@ public class Inventory : MonoBehaviour
 
                 if (!(RessourcesNameNumber[RessourcesName[indexRessource]] >= 99))
                 {
-                    RessourcesNameNumber[RessourcesName[indexRessource]] = RessourcesNameNumber[RessourcesName[indexRessource]] + 1;
+                    RessourcesNameNumber[RessourcesName[indexRessource]]++;
 
                     int cpt2 = 0;
                     int index = 0;
@@ -163,21 +182,5 @@ public class Inventory : MonoBehaviour
 
             indexRessource = -1;
         }
-    }
-
-    /// <summary>
-    /// CHange the selected item
-    /// </summary>
-    /// <param name="number"></param>
-    public void ClickedSlot(int number)
-    {
-        selectedRessource = number;
-
-        foreach (UnityEngine.UI.Image selection in tabSelection)
-        {
-            selection.enabled = false;
-        }
-
-        tabSelection[number].enabled = true;
     }
 }

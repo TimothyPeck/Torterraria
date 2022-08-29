@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody rb;
     private int health;
 
+    private float spawnTime;
+
     // eject
     private Vector2 collisionDirection;
     private float lastCollision;
@@ -28,6 +30,9 @@ public class Enemy : MonoBehaviour
         timeSpent = 0f;
         rb = GetComponent<Rigidbody>();
         health = healthMax;
+
+        spawnTime = Time.time;
+
     }
 
     // Update is called once per frame
@@ -52,7 +57,7 @@ public class Enemy : MonoBehaviour
         // distance between the player and the enemy
         float distance = Vector2.Distance(gameObject.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
 
-        if(Mathf.Abs(distance) > 40f) // if too far away from the player, disappear forever
+        if(Mathf.Abs(distance) > 55f) // if too far away from the player, disappear forever
         {
             GameHandler.EnemyKilled();
             GameObject.Destroy(gameObject);
@@ -83,7 +88,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
         collisionDirection = (this.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position);
-        collisionDirection = collisionDirection / collisionDirection.magnitude * 12;
+        collisionDirection = collisionDirection / collisionDirection.magnitude * 8;
         lastCollision = Time.time;
         return false;
     }

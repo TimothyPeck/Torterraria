@@ -8,8 +8,10 @@ public class Player : MonoBehaviour
     public int health;
     public HealthBar healthBar;
     public Vector2 spawnPosition;
+    public GameObject canvas;
 
     public bool canJump;
+    public float lastGroundContact;
 
     // eject
     private float lastCollision;
@@ -41,7 +43,8 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.tag == "Ground")
         {
             canJump = true;
         }
@@ -62,21 +65,21 @@ public class Player : MonoBehaviour
                 if (ressource == collisionName[0])
                 {
                     Inventory.indexRessource = cpt;
+                    canvas.GetComponent<Inventory>().CollectResource();
                 }
-
                 cpt++;
             }
 
+            GameObject.Destroy(collision.gameObject);
+        }
+    }
 
-            GameObject.Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.tag == "Enemy1Loot")
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
         {
-            GameObject.Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.tag == "Enemy2Loot")
-        {
-            GameObject.Destroy(collision.gameObject);
+            canJump = true;
+            lastGroundContact = Time.time;
         }
     }
 
