@@ -9,6 +9,9 @@ TagManager:
   - Item
   - slot
   - Platform
+  - SuperDirt
+  - SuperStone
+  - SuperWood
   layers:
   - Default
   - TransparentFX

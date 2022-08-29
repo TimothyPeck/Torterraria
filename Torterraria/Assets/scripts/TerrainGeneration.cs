@@ -26,6 +26,10 @@ public class TerrainGeneration : MonoBehaviour
     /// The platform type to be used
     /// </summary>
     public GameObject platformType = null;
+
+    public GameObject superDirtType = null;
+    public GameObject superStoneType = null;
+    public GameObject superWoodType = null;
     /// <summary>
     /// The trees to be used
     /// </summary>
@@ -73,8 +77,54 @@ public class TerrainGeneration : MonoBehaviour
             // Gets the position of the block and centers it on the location.
             int xPosition = Mathf.CeilToInt(i);
             int yPosition = Mathf.CeilToInt(-6f + Mathf.PerlinNoise(i / 30f, 0f) * 4f);
+
+            if (xPosition < -75 && xPosition > -80)
+            {
+                for (int j = GameManager.HEIGHT - 1; j > -GameManager.HEIGHT; j--)
+                {
+                    GameObject bx;
+                    bx = GameObject.Instantiate(superDirtType);
+                    bx.name = "superDirt_" + GameManager.cpt;
+                    GameManager.cpt++;
+                    bx.transform.parent = groundTransform;
+                    bx.tag = "SuperDirt";
+                    bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
+
+                    filledPositions[xPosition + GameManager.WIDTH][j + GameManager.HEIGHT] = true;
+                }
+            }
+            else if (xPosition < 2 && xPosition > -2)
+            {
+                for (int j = GameManager.HEIGHT - 1; j > -GameManager.HEIGHT; j--)
+                {
+                    GameObject bx;
+                    bx = GameObject.Instantiate(superStoneType);
+                    bx.name = "superStone_" + GameManager.cpt;
+                    GameManager.cpt++;
+                    bx.transform.parent = groundTransform;
+                    bx.tag = "SuperStone";
+                    bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
+
+                    filledPositions[xPosition + GameManager.WIDTH][j + GameManager.HEIGHT] = true;
+                }
+            }
+            else if (xPosition >75 && xPosition < 80)
+            {
+                for (int j = GameManager.HEIGHT - 1; j > -GameManager.HEIGHT; j--)
+                {
+                    GameObject bx;
+                    bx = GameObject.Instantiate(superWoodType);
+                    bx.name = "superWood_" + GameManager.cpt;
+                    GameManager.cpt++;
+                    bx.transform.parent = groundTransform;
+                    bx.tag = "SuperWood";
+                    bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
+
+                    filledPositions[xPosition + GameManager.WIDTH][j + GameManager.HEIGHT] = true;
+                }
+            }
             // Ensures that there are no overlapping blocks.
-            if (!usedX.Contains(xPosition))
+            else if (!usedX.Contains(xPosition))
             {
                 // Goes from the floor to the lowest position
                 for (int j = yPosition; j > -GameManager.HEIGHT; j--)
@@ -104,7 +154,7 @@ public class TerrainGeneration : MonoBehaviour
                         bx = GameObject.Instantiate(stoneType);
                         bx.name = "stone_" + GameManager.cpt;
                     }
-                    
+
                     // Adds to parent.
                     bx.transform.parent = groundTransform;
                     // Adds tag to make it breakable

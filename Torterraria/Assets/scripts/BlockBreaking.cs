@@ -185,8 +185,8 @@ public class BlockBreaking : MonoBehaviour
         if (clickedObject.name == "front" || clickedObject.name == "top" || clickedObject.name == "bottom")
         {
             clickedObject = clickedObject.transform.parent.gameObject;
-            clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, Mathf.FloorToInt(clickedObject.transform.position.y), 0);
         }
+        clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, Mathf.FloorToInt(clickedObject.transform.position.y), -0.4f);
         // Leaves cannot be obtained and therefor cannot be dropped
         if (!clickedObject.name.Contains("leaves"))
         {
@@ -194,8 +194,6 @@ public class BlockBreaking : MonoBehaviour
             clickedObject.tag = "Item";
             //Makes the block smaller -> now obtainable.
             clickedObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-            if (clickedObject.transform.parent.gameObject.name.Contains("tree"))
-                clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, clickedObject.transform.position.y, 0);
         }
         else
         {

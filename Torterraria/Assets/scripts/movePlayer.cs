@@ -35,7 +35,7 @@ public class movePlayer : MonoBehaviour
         //Teleports the player back to spawn if they fall out of the world somehow
         if (rb.transform.position.y < -GameManager.HEIGHT - 10)
         {
-            rb.transform.position = new Vector3(0, 10, 0);
+            rb.transform.position = GameObject.Find("Spawn").transform.position;
         }
 
         // calculate the force of the collision with an enemy

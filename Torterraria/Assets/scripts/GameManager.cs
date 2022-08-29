@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public const int WIDTH = 100;
+    public const int WIDTH = 150;
     public const int HEIGHT = 200;
     public static int cpt = 0;
     // Start is called before the first frame update
