@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         {
             // Add the item picked up to the inventory
             int cpt = 0;
-            foreach (string ressource in Inventory.RessourcesName)
+            foreach (string ressource in Inventory.ressourcesName)
             {
                 string[] collisionName = collision.gameObject.name.Split("_");
                 if (ressource == collisionName[0])

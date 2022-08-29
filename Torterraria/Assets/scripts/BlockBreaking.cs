@@ -114,13 +114,13 @@ public class BlockBreaking : MonoBehaviour
                         bool isdropped = false;
                         string key = null;
 
-                        foreach (var ressource in Inventory.RessourcesNameNumber)
+                        foreach (var ressource in Inventory.ressourcesNameNumber)
                         {
                             if (cpt == Inventory.selectedRessource)
                             {
                                 string currentKey = RessourceTypes.FirstOrDefault(x => x.Key == ressource.Key).Key;
 
-                                if (currentKey != null && Inventory.RessourcesNameNumber[ressource.Key] >= 1)
+                                if (currentKey != null && Inventory.ressourcesNameNumber[ressource.Key] >= 1)
                                 {
                                     cube = Instantiate(RessourceTypes[currentKey]);
                                     cube.name = cube.name.Split("_")[1].Split("(")[0] + "_a";
@@ -134,7 +134,7 @@ public class BlockBreaking : MonoBehaviour
 
                         if (isdropped)
                         {
-                            Inventory.RessourcesNameNumber[key]--;// = index - 1;
+                            Inventory.ressourcesNameNumber[key]--;// = index - 1;
 
                             //Inventory.text.text = Inventory.RessourcesNameNumber[key].ToString();
 
@@ -144,10 +144,7 @@ public class BlockBreaking : MonoBehaviour
 
                             TMP_Text text = slot.GetComponentInChildren(typeof(TMP_Text)) as TMP_Text;
 
-                            text.text = Inventory.RessourcesNameNumber[key].ToString();
-                            
-
-
+                            text.text = Inventory.ressourcesNameNumber[key].ToString();
 
                             isdropped = false;
 
