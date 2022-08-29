@@ -74,8 +74,6 @@ public class BlockBreaking : MonoBehaviour
             // Also checks if the object is close enough to be broken.
             if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
             {
-                print(lastClicked.transform.position.x);
-                print(TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT]);
                 TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                 DropBlock(lastClicked);
             }
@@ -100,7 +98,6 @@ public class BlockBreaking : MonoBehaviour
                     // The hit location transformed into a 3D vector.
                     Vector3 hitVector = hit.point;
 
-                    print(TerrainGeneration.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT]);
                     //Checks that the point is within the confines of the world and that the player is close enough,
                     // also checks that the coordinates of the block haven't been filled already.
                     if (hit.point.x < GameManager.WIDTH &&
@@ -169,7 +166,6 @@ public class BlockBreaking : MonoBehaviour
                             cube.transform.position = hitVector;
                         }
                     }
-                    print(TerrainGeneration.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT]);
                 }
             }
         }
