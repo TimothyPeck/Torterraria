@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int baseHealth;
-    public int health;
     public HealthBar healthBar;
     public Vector2 spawnPosition;
     public GameObject canvas;
@@ -13,13 +11,15 @@ public class Player : MonoBehaviour
     public bool canJump;
     public float lastGroundContact;
 
+    private Health h;
+
     // eject
     private float lastCollision;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = baseHealth;
+        h = GetComponent<Health>();
         gameObject.transform.position = spawnPosition;
         canJump = true;
     }
@@ -28,22 +28,21 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Health regen
-        if (Time.time - lastCollision > 5 && health < baseHealth)
+        if (Time.time - lastCollision > 5 && h.health < h.baseHealth)
         {
-            health++;
+            h.health++;
             healthBar.UpdateHealthBar();
             lastCollision += 1;
         }
 
         if (Input.GetKeyDown("q"))
         {
-            PlayerHit(baseHealth / 2);
+            PlayerHit(h.baseHealth / 2);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.tag == "Ground")
         {
             canJump = true;
@@ -105,14 +104,14 @@ public class Player : MonoBehaviour
         // Immunity after hit (in seconds)
         if (Time.time - lastCollision > 1.5)
         {
-            health -= damage;
+            h.health -= damage;
             lastCollision = Time.time;
         }
-        if (health <= 0)
+        if (h.health <= 0)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
             gameObject.transform.position = GameObject.Find("Spawn").transform.position;
-            health = baseHealth;
+            h.health = h.baseHealth;
             isDead = true;
         }
         healthBar.UpdateHealthBar();

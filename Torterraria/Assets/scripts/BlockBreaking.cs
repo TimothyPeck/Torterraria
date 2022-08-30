@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class BlockBreaking : MonoBehaviour
 {
-    public GameObject canvas;
 
     public GameObject woodType = null;
     public GameObject stoneType = null;
@@ -29,6 +28,7 @@ public class BlockBreaking : MonoBehaviour
     public GameObject plankType = null;
     public GameObject crownType = null;
 
+    public GameObject canvas;
     public Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
     /// <summary>
     /// The platform type to be used
@@ -59,6 +59,7 @@ public class BlockBreaking : MonoBehaviour
         RessourceTypes.Add("showel", showelType);
         RessourceTypes.Add("plank", plankType);
         RessourceTypes.Add("crown", crownType);
+        RessourceTypes.Add("platform", platformType);
     }
 
     // Update is called once per frame

@@ -79,6 +79,8 @@ public class Inventory : MonoBehaviour
         ressourcesName.Add("plank");
         ressourcesName.Add("crown");
 
+        ressourcesName.Add("platform");
+
         recipe.Add("sword_enemy4_legendarySword", 5);
         recipe.Add("showel_enemy1_legendaryShowel", 8);
         recipe.Add("pickaxe_enemy2_legendaryPickaxe", 7);
@@ -90,6 +92,8 @@ public class Inventory : MonoBehaviour
         recipe.Add("wood_iron_sword", 13);
         recipe.Add("iron_stone_pickaxe", 15);
         recipe.Add("wood_stone_axe", 14);
+
+        recipe.Add("grass_wood_platform", 19);
 
         // Hide every slots
 

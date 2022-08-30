@@ -5,16 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int damage;
-    public int healthMax;
     public int speed;
     public float dropRate;
     public GameObject lootToDrop;
+    public HealthBar healthBar;
     public float secondsInDirection;
 
     private float speedX;
     private float timeSpent;
     private Rigidbody rb;
-    private int health;
+    private Health h;
 
     private float spawnTime;
 
@@ -29,7 +29,9 @@ public class Enemy : MonoBehaviour
         speedX = speed;
         timeSpent = 0f;
         rb = GetComponent<Rigidbody>();
-        health = healthMax;
+        h = GetComponent<Health>();
+
+        h.health = h.baseHealth;
 
         spawnTime = Time.time;
 
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour
 
         if(Mathf.Abs(distance) > 55f) // if too far away from the player, disappear forever
         {
-            GameHandler.EnemyKilled();
+            GameManager.EnemyKilled();
             GameObject.Destroy(gameObject);
         }
         else if (Mathf.Abs(distance) > 8f) // if close enough, run to the player
@@ -75,10 +77,11 @@ public class Enemy : MonoBehaviour
 
     public bool GettingAttacked(int damageTaken)
     {
-        health -= damageTaken;
-        if (health <= 0)
+        h.health -= damageTaken;
+        healthBar.UpdateHealthBar();
+        if (h.health <= 0)
         {
-            GameHandler.EnemyKilled();
+            GameManager.EnemyKilled();
             if (Random.value < dropRate)
             {
                 GameObject.Instantiate(lootToDrop, gameObject.transform.position, Quaternion.identity);
