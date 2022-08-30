@@ -64,14 +64,13 @@ public class TerrainGeneration : MonoBehaviour
         }
 
         // Modified version of https://www.youtube.com/watch?v=fHZGJuRfDUs
-        //Goes from as far left to as far right as possible
         Transform groundTransform = GameObject.Find("Ground").transform;
         // Gets random positions for trees.
         for(int i = 0; i < GameManager.WIDTH / treeSpacing; i++)
         {
             treesX.Add(GetRandomNumber(-GameManager.WIDTH + treeSpacing * 2, GameManager.WIDTH - treeSpacing));
         }
-        //From max left ot max right
+        //Goes from as far left to as far right as possible
         for (int i = -GameManager.WIDTH; i < GameManager.WIDTH; i++)
         {
             // Gets the position of the block and centers it on the location.

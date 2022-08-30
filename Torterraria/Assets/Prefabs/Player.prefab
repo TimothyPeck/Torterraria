@@ -103,7 +103,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3698815209816802392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 19.909327}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.032734975, y: 0.05564608, z: 0.027439998}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -344,8 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9bc3e903895754fa64130b1b6d7f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 3
-  health: 0
   healthBar: {fileID: 3698815210076478687}
   spawnPosition: {x: -10, y: 0}
   canvas: {fileID: 0}
@@ -364,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 3698815209783795158}
-  player: {fileID: 3698815210076478656}
+  health: {fileID: 0}
 --- !u!1 &3698815211180237003
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3698815211180237003}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.004, y: -0.002, z: 19.909327}
+  m_LocalPosition: {x: 0.004, y: -0.002, z: -2}
   m_LocalScale: {x: 0.21476512, y: 0.36506525, z: 0.17999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -409,8 +407,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.69146764, b: 0, a: 1}
-  m_Intensity: 2
-  m_Range: 20
+  m_Intensity: 1
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
