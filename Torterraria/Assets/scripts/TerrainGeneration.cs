@@ -216,6 +216,7 @@ public class TerrainGeneration : MonoBehaviour
         wallLeft.GetComponent<Renderer>().enabled = false;
         wallLeft.transform.localScale = new Vector3(1, 1000, 1);
         wallLeft.transform.position = new Vector3(-GameManager.WIDTH - 1, 0, 0);
+        wallLeft.GetComponent<BoxCollider>().material = GameObject.Find("block_grass").gameObject.GetComponent<BoxCollider>().material;
 
         // Ditto but right hand side
         GameObject wallRight = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -225,6 +226,7 @@ public class TerrainGeneration : MonoBehaviour
         wallRight.GetComponent<Renderer>().enabled = false;
         wallRight.transform.localScale = new Vector3(1, 1000, 1);
         wallRight.transform.position = new Vector3(GameManager.WIDTH, 0, 0);
+        wallRight.GetComponent<BoxCollider>().material = GameObject.Find("block_grass").gameObject.GetComponent<BoxCollider>().material;
     }
 
     /// <summary>

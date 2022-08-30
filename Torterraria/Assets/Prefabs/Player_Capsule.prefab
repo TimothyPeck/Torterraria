@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 6738218920849645074}
   - component: {fileID: 6738218920849645085}
   - component: {fileID: 6738218920849645084}
+  - component: {fileID: 6571895942490750228}
   m_Layer: 0
   m_Name: Player_Capsule
   m_TagString: Player
@@ -267,7 +268,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6738218920849645087}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b0c0ccea38d7bf348982b77debed156b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -303,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 6738218919241568407}
-  player: {fileID: 6738218920849645084}
+  health: {fileID: 6571895942490750228}
 --- !u!114 &6738218920849645085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,9 +330,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9bc3e903895754fa64130b1b6d7f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 3
-  health: 0
   healthBar: {fileID: 6738218920849645074}
+  spawnPosition: {x: 0, y: 0}
+  canvas: {fileID: 0}
+  canJump: 0
+  lastGroundContact: 0
+--- !u!114 &6571895942490750228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6738218920849645087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6df2548a695314693a869a0b97ab05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 5
 --- !u!1 &6738218920868951196
 GameObject:
   m_ObjectHideFlags: 0
