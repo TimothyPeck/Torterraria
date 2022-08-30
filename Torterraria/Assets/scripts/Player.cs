@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         h = GetComponent<Health>();
-        gameObject.transform.position = spawnPosition;
+        gameObject.transform.position = GameObject.Find("Spawn").transform.position;
         canJump = true;
     }
 

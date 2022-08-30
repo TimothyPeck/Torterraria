@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
 
     private float spawnTime;
 
+    private bool isFacingRight = true;
+
     // eject
     private Vector2 collisionDirection;
     private float lastCollision;
@@ -44,7 +46,7 @@ public class Enemy : MonoBehaviour
         if (timeSpent >= secondsInDirection)
         {
             speedX *= -1;
-            timeSpent -= secondsInDirection;
+            timeSpent -= secondsInDirection; 
         }
 
         Vector2 collisionForce = new(0, 0);
@@ -64,14 +66,29 @@ public class Enemy : MonoBehaviour
             GameManager.EnemyKilled();
             GameObject.Destroy(gameObject);
         }
-        else if (Mathf.Abs(distance) > 8f) // if close enough, run to the player
+        else if (Mathf.Abs(distance) > 8f) 
         {
             rb.velocity = new Vector2(speedX + collisionForce.x, forceY);
         }
-        else if (Mathf.Abs(distance) > 1f) // if too close, don't move
+        else if (Mathf.Abs(distance) > 1f) // if close enough, run to the player
         {
             float i = gameObject.transform.position.x > GameObject.FindGameObjectWithTag("Player").transform.position.x ? -1 : 1;
             rb.velocity = new Vector2(i * speed + collisionForce.x, forceY);
+        }
+
+        if (rb.velocity.x < -1 && isFacingRight == true)
+        {
+            isFacingRight = false;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+        else if (rb.velocity.x > -1 && isFacingRight == false)
+            {
+            isFacingRight = true;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
         }
     }
 
