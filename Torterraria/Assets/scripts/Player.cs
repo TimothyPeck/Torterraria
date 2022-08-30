@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        //Debug.Log(collision.gameObject.name);
         if (collision.gameObject.tag == "Ground")
         {
             canJump = true;
@@ -90,9 +91,13 @@ public class Player : MonoBehaviour
 
     IEnumerator MakePlatformTraversable(float seconds, Collision collision)
     {
+        // Saves the collided object to not cause problems if the player touches another object in seconds.
         GameObject collidedObject = collision.gameObject;
+        // Let's player pass through
         collidedObject.GetComponent<MeshCollider>().enabled = false;
+        // Wait for seconds
         yield return new WaitForSecondsRealtime(seconds);
+        // Stop player again.
         collidedObject.GetComponent<MeshCollider>().enabled = true;
     }
 
