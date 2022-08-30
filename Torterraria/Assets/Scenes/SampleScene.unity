@@ -633,11 +633,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6738218920600705246, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6738218920600705247, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
       propertyPath: m_Range
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6738218920600705247, guid: 98f6f789b99d18147a024fcdf329a6d6, type: 3}
       propertyPath: m_Intensity
