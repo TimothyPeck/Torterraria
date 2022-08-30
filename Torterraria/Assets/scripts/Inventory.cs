@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
         ressourcesName.Add("legendarySword");
         ressourcesName.Add("legendaryAxe");
         ressourcesName.Add("legendaryPickaxe");
-        ressourcesName.Add("legendaryShowel");
+        ressourcesName.Add("legendaryShovel");
 
         ressourcesName.Add("enemy1");
         ressourcesName.Add("enemy2");
@@ -74,7 +74,7 @@ public class Inventory : MonoBehaviour
         ressourcesName.Add("sword");
         ressourcesName.Add("axe");
         ressourcesName.Add("pickaxe");
-        ressourcesName.Add("showel");
+        ressourcesName.Add("shovel");
 
         ressourcesName.Add("plank");
         ressourcesName.Add("crown");
@@ -82,13 +82,13 @@ public class Inventory : MonoBehaviour
         ressourcesName.Add("platform");
 
         recipe.Add("sword_enemy4_legendarySword", 5);
-        recipe.Add("showel_enemy1_legendaryShowel", 8);
+        recipe.Add("shovel_enemy1_legendaryShovel", 8);
         recipe.Add("pickaxe_enemy2_legendaryPickaxe", 7);
         recipe.Add("axe_enemy3_legendaryAxe", 6);
 
         recipe.Add("wood_dirt_plank", 17);
 
-        recipe.Add("wood_plank_showel", 16);
+        recipe.Add("wood_plank_shovel", 16);
         recipe.Add("wood_iron_sword", 13);
         recipe.Add("iron_stone_pickaxe", 15);
         recipe.Add("wood_stone_axe", 14);

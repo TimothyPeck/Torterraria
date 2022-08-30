@@ -76,7 +76,7 @@ public class TerrainGeneration : MonoBehaviour
         {
             // Gets the position of the block and centers it on the location.
             int xPosition = Mathf.CeilToInt(i);
-            int yPosition = Mathf.CeilToInt(-6f + Mathf.PerlinNoise(i / 30f, 0f) * 4f);
+            int yPosition = Mathf.CeilToInt(-6f + Mathf.PerlinNoise(i / 30f, 0f) * 8f);
 
             if (xPosition < -75 && xPosition > -80)
             {

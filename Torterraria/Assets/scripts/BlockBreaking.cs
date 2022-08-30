@@ -70,10 +70,64 @@ public class BlockBreaking : MonoBehaviour
         //If the player has clicked an object
         if (lastClicked != null && canvas.GetComponent<Inventory>().CanvasObject.enabled == false)
         {
+            // Makes sure the shivel is selected to break super dirt
+            if (lastClicked.tag == "SuperDirt")
+            {
+                int cpt = 0;
+
+                foreach (var ressource in Inventory.ressourcesNameNumber)
+                {
+                    if (cpt == Inventory.selectedRessource)
+                    {
+                        if (ressource.Key == "legendaryShovel")
+                        {
+                            TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                            DropBlock(lastClicked);
+                        }
+                    }
+                    cpt++;
+                }
+            }
+            // Makes sure the pickaxe is selected to break super stone
+            else if(lastClicked.tag == "SuperStone")
+            {
+                int cpt = 0;
+
+                foreach (var ressource in Inventory.ressourcesNameNumber)
+                {
+                    if (cpt == Inventory.selectedRessource)
+                    {
+                        if (ressource.Key == "legendaryPickaxe")
+                        {
+                            TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                            DropBlock(lastClicked);
+                        }
+                    }
+                    cpt++;
+                }
+            }
+            // Makes sure the axe is selected to break super wood
+            else if (lastClicked.tag == "SuperWood")
+            {
+                int cpt = 0;
+
+                foreach (var ressource in Inventory.ressourcesNameNumber)
+                {
+                    if (cpt == Inventory.selectedRessource)
+                    {
+                        if (ressource.Key == "legendaryAxe")
+                        {
+                            TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                            DropBlock(lastClicked);
+                        }
+                    }
+                    cpt++;
+                }
+            }
             // Gets the last clicked object and checks if it's tagged as Ground.
             // If the object is part of the ground and the mouse button used to click on it is the left one, then the block is destroyed.
             // Also checks if the object is close enough to be broken.
-            if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
+            else if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
             {
                 TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                 DropBlock(lastClicked);
@@ -115,31 +169,31 @@ public class BlockBreaking : MonoBehaviour
                         bool isdropped = false;
                         string key = null;
 
-                        //foreach (var ressource in Inventory.ressourcesNameNumber)
-                        //{
-                        //    if (cpt == Inventory.selectedRessource)
-                        //    {
-                        //        string currentKey = RessourceTypes.FirstOrDefault(x => x.Key == ressource.Key).Key;
+                        foreach (var ressource in Inventory.ressourcesNameNumber)
+                        {
+                            if (cpt == Inventory.selectedRessource)
+                            {
+                                string currentKey = RessourceTypes.FirstOrDefault(x => x.Key == ressource.Key).Key;
 
-                        //        if (currentKey != null && Inventory.ressourcesNameNumber[ressource.Key] >= 1)
-                        //        {
-                        //            cube = Instantiate(RessourceTypes[currentKey]);
-                        //            cube.name = cube.name.Split("_")[1].Split("(")[0] + "_a";
-                        //            key = ressource.Key;
-                        //            isdropped = true;
-                        //            index = cpt;
-                        //        }
-                        //    }
-                        //    cpt++;
-                        //}
-                        // Just to test pltforms -> remove before push
-                        cube = GameObject.Instantiate(platformType);
-                        cube.name = "platform";
-                        hitVector.x = Mathf.RoundToInt(hitVector.x);
-                        hitVector.y = Mathf.RoundToInt(hitVector.y);
-                        hitVector.y = hitVector.y + 0.45f;
-                        hitVector.z = 0;
-                        cube.transform.position = hitVector;
+                                if (currentKey != null && Inventory.ressourcesNameNumber[ressource.Key] >= 1)
+                                {
+                                    cube = Instantiate(RessourceTypes[currentKey]);
+                                    cube.name = cube.name.Split("_")[1].Split("(")[0] + "_a";
+                                    key = ressource.Key;
+                                    isdropped = true;
+                                    index = cpt;
+                                }
+                            }
+                            cpt++;
+                        }
+                        //// Just to test platforms -> remove before push
+                        //cube = GameObject.Instantiate(platformType);
+                        //cube.name = "platform";
+                        //hitVector.x = Mathf.RoundToInt(hitVector.x);
+                        //hitVector.y = Mathf.RoundToInt(hitVector.y);
+                        //hitVector.y = hitVector.y + 0.45f;
+                        //hitVector.z = 0;
+                        //cube.transform.position = hitVector;
 
                         if (isdropped)
                         {
