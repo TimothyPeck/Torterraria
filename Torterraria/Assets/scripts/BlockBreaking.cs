@@ -115,23 +115,31 @@ public class BlockBreaking : MonoBehaviour
                         bool isdropped = false;
                         string key = null;
 
-                        foreach (var ressource in Inventory.ressourcesNameNumber)
-                        {
-                            if (cpt == Inventory.selectedRessource)
-                            {
-                                string currentKey = RessourceTypes.FirstOrDefault(x => x.Key == ressource.Key).Key;
+                        //foreach (var ressource in Inventory.ressourcesNameNumber)
+                        //{
+                        //    if (cpt == Inventory.selectedRessource)
+                        //    {
+                        //        string currentKey = RessourceTypes.FirstOrDefault(x => x.Key == ressource.Key).Key;
 
-                                if (currentKey != null && Inventory.ressourcesNameNumber[ressource.Key] >= 1)
-                                {
-                                    cube = Instantiate(RessourceTypes[currentKey]);
-                                    cube.name = cube.name.Split("_")[1].Split("(")[0] + "_a";
-                                    key = ressource.Key;
-                                    isdropped = true;
-                                    index = cpt;
-                                }
-                            }
-                            cpt++;
-                        }
+                        //        if (currentKey != null && Inventory.ressourcesNameNumber[ressource.Key] >= 1)
+                        //        {
+                        //            cube = Instantiate(RessourceTypes[currentKey]);
+                        //            cube.name = cube.name.Split("_")[1].Split("(")[0] + "_a";
+                        //            key = ressource.Key;
+                        //            isdropped = true;
+                        //            index = cpt;
+                        //        }
+                        //    }
+                        //    cpt++;
+                        //}
+                        // Just to test pltforms -> remove before push
+                        cube = GameObject.Instantiate(platformType);
+                        cube.name = "platform";
+                        hitVector.x = Mathf.RoundToInt(hitVector.x);
+                        hitVector.y = Mathf.RoundToInt(hitVector.y);
+                        hitVector.y = hitVector.y + 0.45f;
+                        hitVector.z = 0;
+                        cube.transform.position = hitVector;
 
                         if (isdropped)
                         {
@@ -159,6 +167,7 @@ public class BlockBreaking : MonoBehaviour
                             //Rounds the position so that all the blocks are aligned correctly
                             hitVector.x = Mathf.RoundToInt(hitVector.x);
                             hitVector.y = Mathf.RoundToInt(hitVector.y);
+                            hitVector.y += key == "platform" ? 0.45f : 0;
                             hitVector.z = 0;
                             //Moves the block to the position
                             cube.transform.position = hitVector;
