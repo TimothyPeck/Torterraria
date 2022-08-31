@@ -1267,6 +1267,9 @@ MonoBehaviour:
   timeMultiplier: 1
   sceneLight: {fileID: 1568766641}
   torchLight: {fileID: 472808343}
+  backgroundImage: {fileID: 1069999561}
+  backgroundDay: {fileID: 21300000, guid: fcecbcb9e95ffb14c9f51c644f35e1b3, type: 3}
+  backgroundNight: {fileID: 21300000, guid: 9563e7444fed947479616430ec27f045, type: 3}
 --- !u!1 &1572942043
 GameObject:
   m_ObjectHideFlags: 0

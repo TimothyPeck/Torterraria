@@ -3038,7 +3038,7 @@ GameObject:
   - component: {fileID: 6207237418246492272}
   - component: {fileID: 2153984262802430050}
   m_Layer: 0
-  m_Name: enemy2
+  m_Name: iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3092,7 +3092,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8ca20f1d66187542a83b9d4a01fd234, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f088d64d6876cc4d97101cd63897536, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

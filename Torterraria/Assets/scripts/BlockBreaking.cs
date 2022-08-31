@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class BlockBreaking : MonoBehaviour
@@ -12,20 +10,10 @@ public class BlockBreaking : MonoBehaviour
     public GameObject ironType = null;
     public GameObject grassType = null;
     public GameObject dirtType = null;
-    public GameObject legendarySwordType = null;
-    public GameObject legendaryAxeType = null;
-    public GameObject legendaryPickaxeType = null;
-    public GameObject legendaryShowelType = null;
     public GameObject enemy1Type = null;
     public GameObject enemy2Type = null;
     public GameObject enemy3Type = null;
     public GameObject enemy4Type = null;
-    public GameObject swordType = null;
-    public GameObject axeType = null;
-    public GameObject pickaxeType = null;
-    public GameObject showelType = null;
-    public GameObject plankType = null;
-    public GameObject crownType = null;
 
     public GameObject canvas;
     public Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
@@ -44,20 +32,20 @@ public class BlockBreaking : MonoBehaviour
         RessourceTypes.Add("stone", stoneType);
         RessourceTypes.Add("grass", grassType);
         RessourceTypes.Add("dirt", dirtType);
-        RessourceTypes.Add("legendarySword", legendarySwordType);
-        RessourceTypes.Add("legendaryAxe", legendaryAxeType);
-        RessourceTypes.Add("legendaryPickaxe", legendaryPickaxeType);
-        RessourceTypes.Add("legendaryShowel", legendaryShowelType);
+        //RessourceTypes.Add("legendarySword", legendarySwordType);
+        //RessourceTypes.Add("legendaryAxe", legendaryAxeType);
+        //RessourceTypes.Add("legendaryPickaxe", legendaryPickaxeType);
+        //RessourceTypes.Add("legendaryShowel", legendaryShowelType);
         RessourceTypes.Add("enemy1", enemy1Type);
         RessourceTypes.Add("enemy2", enemy2Type);
         RessourceTypes.Add("enemy3", enemy3Type);
         RessourceTypes.Add("enemy4", enemy4Type);
-        RessourceTypes.Add("sword", swordType);
-        RessourceTypes.Add("axe", axeType);
-        RessourceTypes.Add("pickaxe", pickaxeType);
-        RessourceTypes.Add("showel", showelType);
-        RessourceTypes.Add("plank", plankType);
-        RessourceTypes.Add("crown", crownType);
+        //RessourceTypes.Add("sword", swordType);
+        //RessourceTypes.Add("axe", axeType);
+        //RessourceTypes.Add("pickaxe", pickaxeType);
+        //RessourceTypes.Add("showel", showelType);
+        //RessourceTypes.Add("plank", plankType);
+        //RessourceTypes.Add("crown", crownType);
         RessourceTypes.Add("platform", platformType);
     }
 

@@ -984,6 +984,9 @@ MonoBehaviour:
   timeMultiplier: 1
   sceneLight: {fileID: 1568766641}
   torchLight: {fileID: 472808343}
+  backgroundImage: {fileID: 1069999561}
+  backgroundDay: {fileID: 21300000, guid: fcecbcb9e95ffb14c9f51c644f35e1b3, type: 3}
+  backgroundNight: {fileID: 21300000, guid: 9563e7444fed947479616430ec27f045, type: 3}
 --- !u!1 &1572942043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1066,14 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 699861769}
+    - target: {fileID: 1113735448131039624, guid: 5b213ddb8a0337b4187f3ef837469332, type: 3}
+      propertyPath: enemy3Type
+      value: 
+      objectReference: {fileID: 3132395302062843199, guid: 169fe384398862d43b52e90fe8a90f24, type: 3}
+    - target: {fileID: 1113735448131039624, guid: 5b213ddb8a0337b4187f3ef837469332, type: 3}
+      propertyPath: enemy4Type
+      value: 
+      objectReference: {fileID: 3132395302062843199, guid: 20d0b8e55a46d1941b4fae5683c2c0eb, type: 3}
     - target: {fileID: 1113735448131039624, guid: 5b213ddb8a0337b4187f3ef837469332, type: 3}
       propertyPath: platformType
       value: 
