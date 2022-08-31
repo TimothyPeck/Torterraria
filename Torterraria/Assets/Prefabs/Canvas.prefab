@@ -728,7 +728,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5c5f8903f55cfd24ca3e837c09dd4f17, type: 3}
   - {fileID: 21300000, guid: 1d2f1fbdf65801346a37fccbed408dbb, type: 3}
   - {fileID: 21300000, guid: af4a480f28ab05f439d9220951920ac9, type: 3}
-  - {fileID: 21300000, guid: f6bc433a683a91744a5129a29f367913, type: 3}
+  - {fileID: 21300000, guid: a686d7d27d2552348987fe6f3e743451, type: 3}
   craftZoneLeft: {fileID: 1683147921277933118}
   craftZoneRight: {fileID: 1683147919719704352}
   craftZoneResult: {fileID: 1683147921246174276}
