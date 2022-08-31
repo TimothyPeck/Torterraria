@@ -174,6 +174,7 @@ public class TerrainGeneration : MonoBehaviour
                     tree.name = "tree" + GameManager.cpt;
                     tree.transform.parent = groundTransform;
                     tree.transform.localScale = new Vector3(1, 1, 0.1f);
+                    tree.transform.rotation = Quaternion.Euler(0f, Random.value < 0.5f ? 0f : 180f, 0f);
                     tree.transform.position = new Vector3(xPosition, yPosition + 1, 0.5f);
                 }
             }
