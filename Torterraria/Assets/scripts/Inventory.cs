@@ -242,6 +242,8 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.drop);
+
         isCorrectRecipe = false;
         button.interactable = false;
     }

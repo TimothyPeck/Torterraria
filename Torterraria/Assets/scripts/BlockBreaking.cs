@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class BlockBreaking : MonoBehaviour
 {
-
     public GameObject woodType = null;
     public GameObject stoneType = null;
     public GameObject ironType = null;
@@ -70,7 +69,7 @@ public class BlockBreaking : MonoBehaviour
         //If the player has clicked an object
         if (lastClicked != null && canvas.GetComponent<Inventory>().CanvasObject.enabled == false)
         {
-            // Makes sure the shivel is selected to break super dirt
+            // Makes sure the shovel is selected to break super dirt
             if (lastClicked.tag == "SuperDirt")
             {
                 int cpt = 0;
@@ -129,6 +128,35 @@ public class BlockBreaking : MonoBehaviour
             // Also checks if the object is close enough to be broken.
             else if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
             {
+                switch (lastClicked.tag)
+                {
+                    case "SuperStone":
+                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.mine);
+                        break;
+                    default:
+                        break;
+                }
+
+                string[] name = lastClicked.name.Split("_");
+
+                switch (name[0])
+                {
+                    case "dirt":
+                    case "grass":
+                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.dig);
+                        break;
+                    case "iron":
+                    case "stone":
+                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.mine);
+                        break;
+                    case "wood":
+                    case "plank":
+                    case "platform":
+                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.cut);
+                        break;
+                    default:
+                        break;
+                }
                 TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                 DropBlock(lastClicked);
             }
@@ -182,6 +210,7 @@ public class BlockBreaking : MonoBehaviour
                                     key = ressource.Key;
                                     isdropped = true;
                                     index = cpt;
+                                    SfxManager.instance.audio.PlayOneShot(SfxManager.instance.drop);
                                 }
                             }
                             cpt++;

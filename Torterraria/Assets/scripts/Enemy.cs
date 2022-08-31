@@ -72,6 +72,28 @@ public class Enemy : MonoBehaviour
         }
         else if (Mathf.Abs(distance) > 1f) // if close enough, run to the player
         {
+            string[] nameEnemy = gameObject.name.Split("(");
+            Debug.Log(nameEnemy[0]);
+            switch (nameEnemy[0])
+            {
+                case "Enemy1":
+                    SfxManager.instance.audio.PlayOneShot(SfxManager.instance.enemy1);
+                    break;
+                case "Enemy2":
+                    SfxManager.instance.audio.PlayOneShot(SfxManager.instance.enemy2);
+                    break;
+                case "Enemy3":
+                    SfxManager.instance.audio.PlayOneShot(SfxManager.instance.enemy3);
+                    break;
+                case "Enemy4":
+                    SfxManager.instance.audio.PlayOneShot(SfxManager.instance.enemy4);
+                    break;
+                case "Boss":
+                    SfxManager.instance.audio.PlayOneShot(SfxManager.instance.boss);
+                    break;
+                default:
+                    break;
+            }
             float i = gameObject.transform.position.x > GameObject.FindGameObjectWithTag("Player").transform.position.x ? -1 : 1;
             rb.velocity = new Vector2(i * speed + collisionForce.x, forceY);
         }
@@ -96,6 +118,7 @@ public class Enemy : MonoBehaviour
     {
         h.health -= damageTaken;
         healthBar.UpdateHealthBar();
+        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.enemyHit);
         if (h.health <= 0)
         {
             GameManager.EnemyKilled();
@@ -103,9 +126,14 @@ public class Enemy : MonoBehaviour
             {
                 GameObject.Instantiate(lootToDrop, gameObject.transform.position, Quaternion.identity);
             }
-            GameObject.Destroy(gameObject);
+
+            SfxManager.instance.audio.PlayOneShot(SfxManager.instance.enemyDeath);
+            GameObject.Destroy(gameObject); 
+
             return true;
+            
         }
+
         collisionDirection = (this.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position);
         collisionDirection = collisionDirection / collisionDirection.magnitude * 8;
         lastCollision = Time.time;

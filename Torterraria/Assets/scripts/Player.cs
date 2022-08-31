@@ -105,6 +105,7 @@ public class Player : MonoBehaviour
 
     bool PlayerHit(int damage)
     {
+        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.playerHit);
         bool isDead = false;
         // Immunity after hit (in seconds)
         if (Time.time - lastCollision > 1.5)
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
             gameObject.transform.position = GameObject.Find("Spawn").transform.position;
             h.health = h.baseHealth;
+            SfxManager.instance.audio.PlayOneShot(SfxManager.instance.playerDeath);
             isDead = true;
         }
         healthBar.UpdateHealthBar();
