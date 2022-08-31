@@ -83,10 +83,14 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag.StartsWith("Super"))
         {
-            canJump = true;
-            lastGroundContact = Time.time;
+            Vector2 vector = transform.position - collision.transform.position;
+            if(vector.y > 0 && 0.5 * vector.y > Mathf.Abs(vector.x))
+            {
+                canJump = true;
+                lastGroundContact = Time.time;
+            }
         }
         else if (collision.gameObject.tag == "Enemy")
         {

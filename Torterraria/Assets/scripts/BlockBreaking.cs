@@ -48,10 +48,12 @@ public class BlockBreaking : MonoBehaviour
         RessourceTypes.Add("legendaryAxe", legendaryAxeType);
         RessourceTypes.Add("legendaryPickaxe", legendaryPickaxeType);
         RessourceTypes.Add("legendaryShowel", legendaryShowelType);
+        /* we don't want to use these items to put in on the world
         RessourceTypes.Add("enemy1", enemy1Type);
         RessourceTypes.Add("enemy2", enemy2Type);
         RessourceTypes.Add("enemy3", enemy3Type);
         RessourceTypes.Add("enemy4", enemy4Type);
+        */
         RessourceTypes.Add("sword", swordType);
         RessourceTypes.Add("axe", axeType);
         RessourceTypes.Add("pickaxe", pickaxeType);

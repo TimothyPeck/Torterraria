@@ -62,7 +62,7 @@ public class movePlayer : MonoBehaviour
         }
 
         //Jumps if the space bar is pressed and the player is not jumping or falling.
-        if (Input.GetKeyDown(KeyCode.Space) && player.canJump == true && Time.time - player.lastGroundContact < 0.3)
+        if (Input.GetKeyDown(KeyCode.Space) && player.canJump == true && Time.time - player.lastGroundContact < 0.1)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
             player.canJump = false;

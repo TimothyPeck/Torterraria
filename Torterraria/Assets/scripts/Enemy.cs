@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour
                 lastJump = Time.time;
                 forceY += 5;
             }
-            if (distanceX > 0.9f) // if close enough, run to the player
+            if (distanceX > 0.7f) // if close enough, run to the player
             {
                 float i = gameObject.transform.position.x > GameObject.FindGameObjectWithTag("Player").transform.position.x ? -1 : 1;
                 forceX = i * speed + collisionForce.x;
