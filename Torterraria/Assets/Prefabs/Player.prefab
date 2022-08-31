@@ -114,7 +114,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.01, y: 0.134}
-  m_SizeDelta: {x: 10, y: 1}
+  m_SizeDelta: {x: 6, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3698815209816802396
 Canvas:
@@ -224,11 +224,11 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3698815210076478680}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b0c0ccea38d7bf348982b77debed156b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.101499684, y: 0.12930901, z: 1}
+  m_Size: {x: 0.101499684, y: 0.12930901, z: 0.9}
   m_Center: {x: -0.01283573, y: -0.01193589, z: 0}
 --- !u!212 &3698815210076478682
 SpriteRenderer:
