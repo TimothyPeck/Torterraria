@@ -11,11 +11,14 @@ public class Enemy : MonoBehaviour
     public HealthBar healthBar;
     public float secondsInDirection;
 
+    public GameObject objectHealthBar;
+
     private float speedX;
     private float timeSpent;
     private Rigidbody rb;
     private Health h;
 
+    private float lastJump;
     private float spawnTime;
 
     private bool isFacingRight = true;
@@ -36,6 +39,7 @@ public class Enemy : MonoBehaviour
         h.health = h.baseHealth;
 
         spawnTime = Time.time;
+        lastJump = Time.time;
 
     }
 
@@ -56,21 +60,26 @@ public class Enemy : MonoBehaviour
         }
         collisionForce.y = Mathf.Max(collisionForce.y, 0);
 
+        float forceX = 0;
         float forceY = collisionForce.y <= 0 ? rb.velocity.y : collisionForce.y;
 
         // distance between the player and the enemy
         float distance = Vector2.Distance(gameObject.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
+        float distanceX = Mathf.Abs(gameObject.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x);
+        float distanceY = GameObject.FindGameObjectWithTag("Player").transform.position.y - gameObject.transform.position.y;
 
-        if(Mathf.Abs(distance) > 55f) // if too far away from the player, disappear forever
+        if (Mathf.Abs(distance) > 55f) // if too far away from the player, disappear forever
         {
             GameManager.EnemyKilled();
             GameObject.Destroy(gameObject);
         }
-        else if (Mathf.Abs(distance) > 8f) 
+        else if (distance > 8f)
         {
-            rb.velocity = new Vector2(speedX + collisionForce.x, forceY);
+            forceX = speedX + collisionForce.x;
+
         }
-        else if (Mathf.Abs(distance) > 1f) // if close enough, run to the player
+            
+        else
         {
             string[] nameEnemy = gameObject.name.Split("(");
             Debug.Log(nameEnemy[0]);
@@ -94,9 +103,20 @@ public class Enemy : MonoBehaviour
                 default:
                     break;
             }
-            float i = gameObject.transform.position.x > GameObject.FindGameObjectWithTag("Player").transform.position.x ? -1 : 1;
-            rb.velocity = new Vector2(i * speed + collisionForce.x, forceY);
+            if (distanceY > 1f && Time.time - lastJump > 2f)
+            {
+                lastJump = Time.time;
+                forceY += 5;
+            }
+            if (distanceX > 0.7f) // if close enough, run to the player
+            {
+                float i = gameObject.transform.position.x > GameObject.FindGameObjectWithTag("Player").transform.position.x ? -1 : 1;
+                forceX = i * speed + collisionForce.x;
+            }
         }
+
+        rb.velocity = new Vector2(forceX, forceY);
+
 
         if (rb.velocity.x < -1 && isFacingRight == true)
         {
@@ -104,6 +124,7 @@ public class Enemy : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+            objectHealthBar.transform.localScale = objectHealthBar.transform.localScale * -1;
         }
         else if (rb.velocity.x > -1 && isFacingRight == false)
             {
@@ -111,6 +132,7 @@ public class Enemy : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+            objectHealthBar.transform.localScale = objectHealthBar.transform.localScale * -1;
         }
     }
 

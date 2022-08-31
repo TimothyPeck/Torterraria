@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float lastGroundContact;
 
     private Health h;
+    private SpriteRenderer spriteRenderer;
 
     // eject
     private float lastCollision;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
         h = GetComponent<Health>();
         gameObject.transform.position = GameObject.Find("Spawn").transform.position;
         canJump = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        lastCollision = Time.time - 5;
     }
 
     // Update is called once per frame
@@ -34,6 +37,21 @@ public class Player : MonoBehaviour
             healthBar.UpdateHealthBar();
             lastCollision += 1;
         }
+        if(Time.time - lastCollision < 1.5) // damage animation, shows invincibility of the player
+        {
+            if (Mathf.RoundToInt((Time.time - lastCollision) * 10) % 2 == 1)
+            {
+                spriteRenderer.enabled = true;
+            }
+            else
+            {
+                spriteRenderer.enabled = false;
+            }
+        }
+        else
+        {
+            spriteRenderer.enabled = true;
+        }
 
         if (Input.GetKeyDown("q"))
         {
@@ -43,19 +61,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(collision.gameObject.name);
-        if (collision.gameObject.tag == "Ground")
-        {
-            canJump = true;
-        }
-        if (collision.gameObject.tag == "Enemy")
-        {
-            if(PlayerHit(collision.gameObject.GetComponent<Enemy>().damage) == false)
-            {
-                gameObject.GetComponent<movePlayer>().DamageForce(transform.position - collision.gameObject.transform.position);
-            }
-        }
-        else if (collision.gameObject.tag == "Item")
+        if (collision.gameObject.tag == "Item")
         {
             // Add the item picked up to the inventory
             int cpt = 0;
@@ -77,12 +83,23 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag.StartsWith("Super"))
         {
-            canJump = true;
-            lastGroundContact = Time.time;
+            Vector2 vector = transform.position - collision.transform.position;
+            if(vector.y > 0 && 0.5 * vector.y > Mathf.Abs(vector.x))
+            {
+                canJump = true;
+                lastGroundContact = Time.time;
+            }
         }
-        //print("collision: " + collision.gameObject.name);
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            if (PlayerHit(collision.gameObject.GetComponent<Enemy>().damage) == false)
+            {
+                gameObject.GetComponent<movePlayer>().DamageForce(transform.position - collision.gameObject.transform.position);
+            }
+        }
+
         if ((collision.gameObject.name.Contains("platform") || collision.gameObject.name.Contains("top")) && Input.GetAxisRaw("Vertical") < 0)
         {
             StartCoroutine(MakePlatformTraversable(.7f, collision));
