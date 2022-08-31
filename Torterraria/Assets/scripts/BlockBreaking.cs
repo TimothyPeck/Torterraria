@@ -28,7 +28,7 @@ public class BlockBreaking : MonoBehaviour
     public GameObject crownType = null;
 
     public GameObject canvas;
-    public Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
     /// <summary>
     /// The platform type to be used
     /// </summary>

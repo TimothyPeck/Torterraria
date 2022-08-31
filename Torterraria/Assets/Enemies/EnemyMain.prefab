@@ -314,6 +314,7 @@ MonoBehaviour:
   lootToDrop: {fileID: 0}
   healthBar: {fileID: 3030028813316958620}
   secondsInDirection: 1.2
+  objectHealthBar: {fileID: 6984407474051834478}
 --- !u!114 &458517798209059090
 MonoBehaviour:
   m_ObjectHideFlags: 0

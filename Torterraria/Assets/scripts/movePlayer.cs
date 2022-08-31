@@ -9,6 +9,8 @@ public class movePlayer : MonoBehaviour
 
     public Animator animator;
 
+    public GameObject healthBar;
+
     private bool m_walk = false;
     private bool isFacingRight = true;
 
@@ -101,6 +103,7 @@ public class movePlayer : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+            healthBar.transform.localScale = healthBar.transform.localScale  * - 1;
         }   
         else if (h < 0 && isFacingRight)
         {
@@ -108,6 +111,7 @@ public class movePlayer : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+            healthBar.transform.localScale = healthBar.transform.localScale * -1;
         }
             
 
