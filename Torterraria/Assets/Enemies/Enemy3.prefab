@@ -1,51 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &534895649726958225
+--- !u!1001 &7778012679659695535
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 458517798209059090, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
+      propertyPath: baseHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 575178724698023975, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 575178724698023975, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: lootToDrop
       value: 
-      objectReference: {fileID: 3132395302062843199, guid: ec49b936913529345bdee3c9018122d9, type: 3}
+      objectReference: {fileID: 3132395302062843199, guid: 169fe384398862d43b52e90fe8a90f24, type: 3}
     - target: {fileID: 9111482577070783065, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Name
-      value: Enemy2
+      value: Enemy3
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783068, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Size.x
-      value: 0.61959225
+      value: 0.37615907
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783068, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Size.y
-      value: 0.507943
+      value: 0.7849862
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783068, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Center.x
-      value: -0.011458358
+      value: 0.01852802
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783068, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Center.y
-      value: 0.012948723
+      value: -0.041405838
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783070, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 05ef31cc2a0c87c4abaaa9b975337dd6, type: 3}
+      objectReference: {fileID: 21300000, guid: b4535ead12b1f9e43913f706afb1de4a, type: 3}
     - target: {fileID: 9111482577070783070, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.9496618
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783070, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.9496618
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783070, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.9811321
       objectReference: {fileID: 0}
     - target: {fileID: 9111482577070783071, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: m_RootOrder
@@ -93,22 +101,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
---- !u!1 &8727459184546050248 stripped
+--- !u!1 &1550206338165856246 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9111482577070783065, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
-  m_PrefabInstance: {fileID: 534895649726958225}
+  m_PrefabInstance: {fileID: 7778012679659695535}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &-8391376041508163711
+--- !u!95 &-308308095611879757
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8727459184546050248}
+  m_GameObject: {fileID: 1550206338165856246}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c67dbe6dc56c17247942deddfe443928, type: 2}
+  m_Controller: {fileID: 9100000, guid: 230a0efb57e8f9b419e8d6b1f55978e1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
