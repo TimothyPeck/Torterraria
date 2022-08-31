@@ -448,6 +448,8 @@ MonoBehaviour:
   enemiesClones:
   - {fileID: 4430779125540845843, guid: 148a6052d1bd57441a252e283b167fab, type: 3}
   - {fileID: 8727459184546050248, guid: e4d5590d51adaca42be19cbd75332658, type: 3}
+  - {fileID: 1550206338165856246, guid: 3f4e976414e8e0a4593bf35c165ae838, type: 3}
+  - {fileID: 4585984880622900536, guid: 6741905fc2b4c1947af0654348b1f6fe, type: 3}
   player: {fileID: 1212490620}
 --- !u!114 &519420034
 MonoBehaviour:
@@ -581,6 +583,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1683147921344887259, guid: 07d99f22ea838d94694c09975daa7be4, type: 3}
+      propertyPath: tabSprites.Array.data[11]
+      value: 
+      objectReference: {fileID: 21300000, guid: 08ac9191a27c0d145a68cd0106a242c3, type: 3}
+    - target: {fileID: 1683147921344887259, guid: 07d99f22ea838d94694c09975daa7be4, type: 3}
+      propertyPath: tabSprites.Array.data[12]
+      value: 
+      objectReference: {fileID: 21300000, guid: 73c8e26d0c4255041b1f1165641ad5a5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07d99f22ea838d94694c09975daa7be4, type: 3}
 --- !u!1 &1069999559
