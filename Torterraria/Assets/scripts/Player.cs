@@ -20,11 +20,14 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Dialogue dialogue=new Dialogue();
         h = GetComponent<Health>();
         gameObject.transform.position = GameObject.Find("Spawn").transform.position;
         canJump = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
         lastCollision = Time.time - 5;
+        dialogue.AddSentence("Me", "Something feels off, this Torterra used to be so calm and now evil Pokémon are everywhere… \nI have to investigate.", 8);
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
     // Update is called once per frame

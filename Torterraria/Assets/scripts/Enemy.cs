@@ -82,7 +82,6 @@ public class Enemy : MonoBehaviour
         else
         {
             string[] nameEnemy = gameObject.name.Split("(");
-            Debug.Log(nameEnemy[0]);
             switch (nameEnemy[0])
             {
                 case "Enemy1":

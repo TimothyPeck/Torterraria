@@ -24,6 +24,8 @@ public class BlockBreaking : MonoBehaviour
 
     private BlockTypes selectedType = BlockTypes.PLATFORM;
 
+    Dialogue dialogue = new Dialogue();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +73,11 @@ public class BlockBreaking : MonoBehaviour
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                             DropBlock(lastClicked);
                         }
+                        else
+                        {
+                            dialogue.AddSentence("Me", "Looks like a mere shovel won’t work here. Even worse with bare hands.", 5);
+                            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                        }
                     }
                     cpt++;
                 }
@@ -89,6 +96,11 @@ public class BlockBreaking : MonoBehaviour
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                             DropBlock(lastClicked);
                         }
+                        else
+                        {
+                            dialogue.AddSentence("Me", "Looks like a mere pickaxe won’t work here. Even worse with bare hands.", 5);
+                            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                        }
                     }
                     cpt++;
                 }
@@ -106,6 +118,11 @@ public class BlockBreaking : MonoBehaviour
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                             DropBlock(lastClicked);
+                        }
+                        else
+                        {
+                            dialogue.AddSentence("Me", "Looks like a mere axe won’t work here. Even worse with bare hands.", 5);
+                            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
                         }
                     }
                     cpt++;
@@ -251,6 +268,8 @@ public class BlockBreaking : MonoBehaviour
         clickableObj.ResetLastClicked();
         //Resets the last used mouse button, not used
         clickableObj.ResetMouseButton();
+
+        dialogue.empty();
     }
 
     /// <summary>
