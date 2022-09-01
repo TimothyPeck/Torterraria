@@ -192,8 +192,8 @@ GameObject:
   - component: {fileID: 3698815210076478685}
   - component: {fileID: 3698815210076478686}
   - component: {fileID: 3698815210076478656}
-  - component: {fileID: 3698815210076478687}
   - component: {fileID: -8644624114488219010}
+  - component: {fileID: 6238365694143030718}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -346,25 +346,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9bc3e903895754fa64130b1b6d7f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 3698815210076478687}
+  healthBar: {fileID: 6238365694143030718}
   spawnPosition: {x: -10, y: 0}
   canvas: {fileID: 0}
   canJump: 0
   lastGroundContact: 0
---- !u!114 &3698815210076478687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3698815210076478680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568b0db1afe24474593a255a01a1ab79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarImage: {fileID: 3698815209783795158}
-  health: {fileID: -8644624114488219010}
 --- !u!114 &-8644624114488219010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +364,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 3
+--- !u!114 &6238365694143030718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3698815210076478680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351e71897a5b7094bbc199a0b6ca3510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarImage: {fileID: 3698815209783795158}
+  health: {fileID: -8644624114488219010}
 --- !u!1 &3698815211180237003
 GameObject:
   m_ObjectHideFlags: 0

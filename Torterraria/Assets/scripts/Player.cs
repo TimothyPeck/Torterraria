@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public HealthBar healthBar;
+    public HealthBarScript healthBar;
     public Vector2 spawnPosition;
     public GameObject canvas;
 

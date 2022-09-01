@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public int speed;
     public float dropRate;
     public GameObject lootToDrop;
-    public HealthBar healthBar;
+    public HealthBarScript healthBar;
     public float secondsInDirection;
 
     public GameObject objectHealthBar;
