@@ -148,7 +148,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if(!isCorrectRecipe)
+        if (!isCorrectRecipe)
         {
             craftZoneResult.sprite = null;
             button.interactable = false;
