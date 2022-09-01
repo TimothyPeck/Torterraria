@@ -83,7 +83,10 @@ public class Player : MonoBehaviour
             }
             if (collisionName[0] == "crown")
             {
-                Debug.Log("GAGNEEEEEEEEEEEEEEEE");
+                Dialogue dialogue = new Dialogue();
+                dialogue.AddSentence(GameManager.PLAYER_NAME, "Wow, looks like I’m the new king now.", 4);
+                dialogue.AddSentence(GameManager.PLAYER_NAME, "Everything should come back to normal, I’ll protect this world from this day ‘till my last, I swear!", 7);
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
             GameObject.Destroy(collision.gameObject);
         }

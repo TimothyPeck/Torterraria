@@ -73,7 +73,10 @@ public class Enemy : MonoBehaviour
         float distanceY = GameObject.FindGameObjectWithTag("Player").transform.position.y - gameObject.transform.position.y;
         if (distance < 15f && name == "Boss" && bossAlreadySeen == false)
         {
-            Debug.Log("OMG UN TORTIPOUSS!!!");
+            Dialogue dialogue = new Dialogue();
+            dialogue.AddSentence(GameManager.PLAYER_NAME, "OH MY GOD!! It looks monstrous, it must be the root of all evil!", 6);
+            dialogue.AddSentence(GameManager.PLAYER_NAME, "A simple sword or my bare hands won’t do anything against this beast!", 7);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             bossAlreadySeen = true;
         }
         if (distance > 55f && name != "Boss") // if too far away from the player, disappear forever
