@@ -14,25 +14,33 @@ public class Player : MonoBehaviour
     private Health h;
     private SpriteRenderer spriteRenderer;
 
+    private Dialogue dialogue = new Dialogue();
+
+    private bool firstTime = true;
+
     // eject
     private float lastCollision;
 
     // Start is called before the first frame update
     void Start()
     {
-        Dialogue dialogue=new Dialogue();
         h = GetComponent<Health>();
         gameObject.transform.position = GameObject.Find("Spawn").transform.position;
         canJump = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
         lastCollision = Time.time - 5;
-        dialogue.AddSentence("Me", "Something feels off, this Torterra used to be so calm and now evil Pokémon are everywhere… \nI have to investigate.", 8);
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (firstTime)
+        {
+            firstTime = !firstTime;
+            dialogue.AddSentence(GameManager.PLAYER_NAME, "Something feels off, this Torterra used to be so calm and now evil Pokémon are everywhere…", 8);
+            dialogue.AddSentence(GameManager.PLAYER_NAME, "I have to investigate.", 3);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        }
         //Health regen
         if (Time.time - lastCollision > 5 && h.health < h.baseHealth)
         {

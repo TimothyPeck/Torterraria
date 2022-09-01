@@ -62,6 +62,11 @@ public class BlockBreaking : MonoBehaviour
             // Makes sure the shovel is selected to break super dirt
             if (lastClicked.tag == "SuperDirt")
             {
+                if (Inventory.indexRessource == -1)
+                {
+                    dialogue.AddSentence(GameManager.PLAYER_NAME, "Looks like a mere shovel won’t work here. Even worse with bare hands.", 5);
+                    FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                }
                 int cpt = 0;
 
                 foreach (var ressource in Inventory.ressourcesNameNumber)
@@ -75,7 +80,7 @@ public class BlockBreaking : MonoBehaviour
                         }
                         else
                         {
-                            dialogue.AddSentence("Me", "Looks like a mere shovel won’t work here. Even worse with bare hands.", 5);
+                            dialogue.AddSentence(GameManager.PLAYER_NAME, "Looks like a mere shovel won’t work here. Even worse with bare hands.", 5);
                             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
                         }
                     }
@@ -85,6 +90,11 @@ public class BlockBreaking : MonoBehaviour
             // Makes sure the pickaxe is selected to break super stone
             else if(lastClicked.tag == "SuperStone")
             {
+                if (Inventory.indexRessource == -1)
+                {
+                    dialogue.AddSentence(GameManager.PLAYER_NAME, "Looks like a mere pickaxe won’t work here. Even worse with bare hands.", 5);
+                    FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                }
                 int cpt = 0;
 
                 foreach (var ressource in Inventory.ressourcesNameNumber)
@@ -98,7 +108,7 @@ public class BlockBreaking : MonoBehaviour
                         }
                         else
                         {
-                            dialogue.AddSentence("Me", "Looks like a mere pickaxe won’t work here. Even worse with bare hands.", 5);
+                            dialogue.AddSentence(GameManager.PLAYER_NAME, "Looks like a mere pickaxe won’t work here. Even worse with bare hands.", 5);
                             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
                         }
                     }
@@ -108,6 +118,11 @@ public class BlockBreaking : MonoBehaviour
             // Makes sure the axe is selected to break super wood
             else if (lastClicked.tag == "SuperWood")
             {
+                if (Inventory.indexRessource == -1)
+                {
+                    dialogue.AddSentence(GameManager.PLAYER_NAME, "Looks like a mere axe won’t work here. Even worse with bare hands.", 5);
+                    FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                }
                 int cpt = 0;
 
                 foreach (var ressource in Inventory.ressourcesNameNumber)
@@ -121,7 +136,7 @@ public class BlockBreaking : MonoBehaviour
                         }
                         else
                         {
-                            dialogue.AddSentence("Me", "Looks like a mere axe won’t work here. Even worse with bare hands.", 5);
+                            dialogue.AddSentence(GameManager.PLAYER_NAME, "Looks like a mere axe won’t work here. Even worse with bare hands.", 5);
                             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
                         }
                     }

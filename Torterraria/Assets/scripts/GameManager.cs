@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public const int WIDTH = 150;
     public const int HEIGHT = 200;
+    public const string PLAYER_NAME = "Red";
     public static int cpt = 0;
 
     public GameObject[] enemiesClones = new GameObject[nbEnemies];
