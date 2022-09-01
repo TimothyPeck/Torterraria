@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SfxManager : MonoBehaviour
 {
-    public AudioSource audio;
+    public static SfxManager instance;
+
+    public AudioSource audioSource;
 
     public AudioClip enemyDeath;
     public AudioClip enemyHit;
@@ -20,17 +20,20 @@ public class SfxManager : MonoBehaviour
     public AudioClip cut;
     public AudioClip drop;
 
-    public static SfxManager instance;
-
+    /// <summary>
+    /// Plays music when wanted
+    /// </summary>
     private void Awake()
     {
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
+
             return;
         }
 
         instance = this;
+
         DontDestroyOnLoad(this);
     }
 }

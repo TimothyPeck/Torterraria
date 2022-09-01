@@ -15,47 +15,37 @@ public class BlockBreaking : MonoBehaviour
     public GameObject enemy3Type = null;
     public GameObject enemy4Type = null;
 
-    public GameObject canvas;
-    private Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
     /// <summary>
     /// The platform type to be used
     /// </summary>
     public GameObject platformType = null;
 
-    private BlockTypes selectedType = BlockTypes.PLATFORM;
+    public GameObject canvas;
+
+    private Dictionary<string, GameObject> RessourceTypes = new Dictionary<string, GameObject>();
 
     Dialogue dialogue = new Dialogue();
 
     // Start is called before the first frame update
     void Start()
     {
+        // Adds the ressources type
+
         RessourceTypes.Add("wood", woodType);
         RessourceTypes.Add("iron", ironType);
         RessourceTypes.Add("stone", stoneType);
         RessourceTypes.Add("grass", grassType);
         RessourceTypes.Add("dirt", dirtType);
-        //RessourceTypes.Add("legendarySword", legendarySwordType);
-        //RessourceTypes.Add("legendaryAxe", legendaryAxeType);
-        //RessourceTypes.Add("legendaryPickaxe", legendaryPickaxeType);
-        //RessourceTypes.Add("legendaryShowel", legendaryShowelType);
-        //RessourceTypes.Add("enemy1", enemy1Type);
-        //RessourceTypes.Add("enemy2", enemy2Type);
-        //RessourceTypes.Add("enemy3", enemy3Type);
-        //RessourceTypes.Add("enemy4", enemy4Type);
-        //RessourceTypes.Add("sword", swordType);
-        //RessourceTypes.Add("axe", axeType);
-        //RessourceTypes.Add("pickaxe", pickaxeType);
-        //RessourceTypes.Add("showel", showelType);
-        //RessourceTypes.Add("plank", plankType);
-        //RessourceTypes.Add("crown", crownType);
         RessourceTypes.Add("platform", platformType);
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject lastClicked = clickableObj.GetLastClicked();
-        int mouseButton = clickableObj.GetMouseButton();
+        GameObject lastClicked = ClickableObj.GetLastClicked();
+
+        int mouseButton = ClickableObj.GetMouseButton();
+
         //If the player has clicked an object
         if (lastClicked != null && canvas.GetComponent<Inventory>().CanvasObject.enabled == false)
         {
@@ -92,6 +82,7 @@ public class BlockBreaking : MonoBehaviour
                         if (ressource.Key == "legendaryShovel")
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                            
                             DropBlock(lastClicked);
                         }
                         else
@@ -120,6 +111,7 @@ public class BlockBreaking : MonoBehaviour
                         if (ressource.Key == "legendaryPickaxe")
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                            
                             DropBlock(lastClicked);
                         }
                         else
@@ -148,6 +140,7 @@ public class BlockBreaking : MonoBehaviour
                         if (ressource.Key == "legendaryAxe")
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                            
                             DropBlock(lastClicked);
                         }
                         else
@@ -164,10 +157,12 @@ public class BlockBreaking : MonoBehaviour
             // Also checks if the object is close enough to be broken.
             else if (lastClicked.tag == "Ground" && mouseButton == 0 && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8)
             {
+                // Puts sound effects according to the action
+
                 switch (lastClicked.tag)
                 {
                     case "SuperStone":
-                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.mine);
+                        SfxManager.instance.GetComponent<AudioSource>().PlayOneShot(SfxManager.instance.mine);
                         break;
                     default:
                         break;
@@ -179,21 +174,23 @@ public class BlockBreaking : MonoBehaviour
                 {
                     case "dirt":
                     case "grass":
-                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.dig);
+                        SfxManager.instance.GetComponent<AudioSource>().PlayOneShot(SfxManager.instance.dig);
                         break;
                     case "iron":
                     case "stone":
-                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.mine);
+                        SfxManager.instance.GetComponent<AudioSource>().PlayOneShot(SfxManager.instance.mine);
                         break;
                     case "wood":
                     case "plank":
                     case "platform":
-                        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.cut);
+                        SfxManager.instance.GetComponent<AudioSource>().PlayOneShot(SfxManager.instance.cut);
                         break;
                     default:
                         break;
                 }
+
                 TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
+                
                 DropBlock(lastClicked);
             }
             //Checks if the click object is an enemy, if yes deal damage.
@@ -207,10 +204,13 @@ public class BlockBreaking : MonoBehaviour
             {
                 //Gets the position of the mouse click
                 Vector3 mouse = Input.mousePosition;
+
                 //Makes the screen point the direction for the ray
                 Ray castPoint = Camera.main.ScreenPointToRay(mouse);
+
                 //If the ray hits something, this will have the position of the hit
                 RaycastHit hit;
+
                 //Sends the ray and checks for a contact.
                 if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
                 {
@@ -230,7 +230,9 @@ public class BlockBreaking : MonoBehaviour
 
                         int index = -1;
                         int cpt = 0;
+
                         bool isdropped = false;
+
                         string key = null;
 
                         foreach (var ressource in Inventory.ressourcesNameNumber)
@@ -243,28 +245,22 @@ public class BlockBreaking : MonoBehaviour
                                 {
                                     cube = Instantiate(RessourceTypes[currentKey]);
                                     cube.name = cube.name.Split("_")[1].Split("(")[0] + "_a";
+
                                     key = ressource.Key;
+
                                     isdropped = true;
+
                                     index = cpt;
-                                    SfxManager.instance.audio.PlayOneShot(SfxManager.instance.drop);
+
+                                    SfxManager.instance.GetComponent<AudioSource>().PlayOneShot(SfxManager.instance.drop);
                                 }
                             }
                             cpt++;
                         }
-                        //// Just to test platforms -> remove before push
-                        //cube = GameObject.Instantiate(platformType);
-                        //cube.name = "platform";
-                        //hitVector.x = Mathf.RoundToInt(hitVector.x);
-                        //hitVector.y = Mathf.RoundToInt(hitVector.y);
-                        //hitVector.y = hitVector.y + 0.45f;
-                        //hitVector.z = 0;
-                        //cube.transform.position = hitVector;
 
                         if (isdropped)
                         {
-                            Inventory.ressourcesNameNumber[key]--;// = index - 1;
-
-                            //Inventory.text.text = Inventory.RessourcesNameNumber[key].ToString();
+                            Inventory.ressourcesNameNumber[key]--; // = index - 1;
 
                             GameObject childPlane = canvas.GetComponent<Inventory>().tabSelection[index].transform.Find("Plane").gameObject;
 
@@ -277,17 +273,22 @@ public class BlockBreaking : MonoBehaviour
                             isdropped = false;
 
                             GameManager.cpt++;
+
                             //Adds the tag to make it breakable
                             cube.tag = "Ground";
+
                             //Just to be safe, set the scale
                             cube.transform.localScale = new Vector3(1, 1, 1);
+
                             //Make the ground object the parent, in line with the other cubes
                             cube.transform.parent = GameObject.Find("Ground").transform;
+
                             //Rounds the position so that all the blocks are aligned correctly
                             hitVector.x = Mathf.RoundToInt(hitVector.x);
                             hitVector.y = Mathf.RoundToInt(hitVector.y);
                             hitVector.y += key == "platform" ? 0.45f : 0;
                             hitVector.z = 0;
+
                             //Moves the block to the position
                             cube.transform.position = hitVector;
                         }
@@ -295,10 +296,12 @@ public class BlockBreaking : MonoBehaviour
                 }
             }
         }
+
         //Resets the last clicked GameObject so as to not loop on it
-        clickableObj.ResetLastClicked();
+        ClickableObj.ResetLastClicked();
+
         //Resets the last used mouse button, not used
-        clickableObj.ResetMouseButton();
+        ClickableObj.ResetMouseButton();
 
         dialogue.empty();
     }
@@ -314,12 +317,15 @@ public class BlockBreaking : MonoBehaviour
         {
             clickedObject = clickedObject.transform.parent.gameObject;
         }
+
         clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, Mathf.FloorToInt(clickedObject.transform.position.y), -0.4f);
+        
         // Leaves cannot be obtained and therefor cannot be dropped
         if (!clickedObject.name.Contains("leaves"))
         {
             //Changes the tag of the block so as to not break it again
             clickedObject.tag = "Item";
+
             //Makes the block smaller -> now obtainable.
             clickedObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }

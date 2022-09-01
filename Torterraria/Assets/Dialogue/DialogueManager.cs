@@ -63,7 +63,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void DisplayDialogue()
     {
-        print(dialogues.Count);
         if (dialogues.Count == 0)
         {
             EndDialogue();

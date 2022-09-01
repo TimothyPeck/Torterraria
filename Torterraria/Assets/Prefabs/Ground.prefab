@@ -295,10 +295,10 @@ MonoBehaviour:
   dirtType: {fileID: 1759274702559248100}
   enemy1Type: {fileID: 4208596667563132856, guid: 5b995763d764fc84880bd33ac65d6d2e, type: 3}
   enemy2Type: {fileID: 3132395302062843199, guid: ec49b936913529345bdee3c9018122d9, type: 3}
-  enemy3Type: {fileID: 0}
-  enemy4Type: {fileID: 0}
-  canvas: {fileID: 0}
+  enemy3Type: {fileID: 3132395302062843199, guid: 169fe384398862d43b52e90fe8a90f24, type: 3}
+  enemy4Type: {fileID: 3132395302062843199, guid: 20d0b8e55a46d1941b4fae5683c2c0eb, type: 3}
   platformType: {fileID: 4142806038126979215, guid: ffa106a9b75b4ed4e80e5d355ed73450, type: 3}
+  canvas: {fileID: 1683147921344887258, guid: 07d99f22ea838d94694c09975daa7be4, type: 3}
 --- !u!1 &1759274702056280898
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBarScript : MonoBehaviour
 {
     public Image healthBarImage; 
+
     public Health health;
     
     public void UpdateHealthBar()
     {
         // Defines the colour based on the current health of the player.
         Color newColor = Color.green;
+
         if ((float)health.health < (float)health.baseHealth * 0.25f)
         {
             newColor = Color.red;

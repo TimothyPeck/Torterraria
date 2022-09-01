@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowHelp : MonoBehaviour
@@ -7,6 +5,7 @@ public class ShowHelp : MonoBehaviour
     public Canvas helpCanvas = null;
 
     private bool isShown = false;
+
     // Start is called before the first frame update
     void Start()
     {

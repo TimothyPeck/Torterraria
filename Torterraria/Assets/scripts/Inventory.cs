@@ -1,35 +1,25 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Reflection;
-using System.Xml;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     // Public
 
-    public Image[] tabSelection = new Image[20];
-
     public static List<string> ressourcesName = new List<string>();
-
-    public Sprite[] tabSprites = new Sprite[20];
 
     public static int indexRessource = -1;
     public static int selectedRessource = 0;
 
     public static Dictionary<string, int> ressourcesNameNumber = new Dictionary<string, int>();
-    public static Dictionary<string, int> recipe = new Dictionary<string, int>();
+    public Dictionary<string, int> recipe = new Dictionary<string, int>();
 
     public static TMP_Text text;
+
+    public Sprite[] tabSprites = new Sprite[20];
+    public Image[] tabSelection = new Image[20];
 
     public Image craftZoneLeft;
     public Image craftZoneRight;
@@ -38,22 +28,28 @@ public class Inventory : MonoBehaviour
     public Button button;
 
     // Private
+
     public Canvas CanvasObject;
 
     private int cpt = 1;
     private int cptRecipe = 0;
+    int cptRecipeTmp;
 
     private bool alreadyAdded = false;
     private bool goesLeft = true;
     private bool isCorrectRecipe = false;
 
+    private string[] left;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Hides the inventory
+
         CanvasObject = GetComponent<Canvas>();
         CanvasObject.enabled = !CanvasObject.enabled;
 
-        // Add every ressources available
+        // Adds every ressources and recipes available
 
         ressourcesName.Add("wood");
         ressourcesName.Add("iron");
@@ -111,7 +107,8 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Open and closes the inventory when e is pressed.
+        // Open and closes the inventory when e is pressed. If closed, empty the craft zone
+
         if (Input.GetKeyUp("e"))
         {
             CanvasObject.enabled = !CanvasObject.enabled;
@@ -122,35 +119,43 @@ public class Inventory : MonoBehaviour
 
         isCorrectRecipe = false;
 
+        // Checks if the craft zones are occupied and a recipe is about to be made
+
         if (craftZoneLeft.sprite != null && craftZoneRight.sprite != null)
         {
             foreach (var recipes in recipe)
             {
-                string[] left = recipes.Key.Split("_");
+                left = recipes.Key.Split("_");
 
                 if ((left[0] == craftZoneLeft.sprite.name && left[1] == craftZoneRight.sprite.name) ||
                     (left[1] == craftZoneLeft.sprite.name && left[0] == craftZoneRight.sprite.name))
                 {
-                    int cptRecipeTmp = 0;
+                    cptRecipeTmp = 0;
                     cptRecipe = 0;
+
                     foreach (Sprite sprites in tabSprites)
                     {
                         if (sprites.name == left[2])
                         {
                             cptRecipe = cptRecipeTmp;
+
                             craftZoneResult.sprite = sprites;
+
                             isCorrectRecipe = true;
                             button.interactable = true;
                         }
+
                         cptRecipeTmp++;
                     }
                 }
             }
         }
 
-        if (!isCorrectRecipe)
+        // Enables the craft button when a recipe is about to be made
+        if(!isCorrectRecipe)
         {
             craftZoneResult.sprite = null;
+
             button.interactable = false;
         }
     }
@@ -177,6 +182,7 @@ public class Inventory : MonoBehaviour
     public void moveToCraft(GameObject slotToCraft)
     {
         text = slotToCraft.GetComponentInChildren(typeof(TMP_Text)) as TMP_Text;
+
         int number = Convert.ToInt32(text.text);
 
         if (goesLeft)
@@ -184,6 +190,7 @@ public class Inventory : MonoBehaviour
             if (number >= 1)
             {
                 craftZoneLeft.sprite = slotToCraft.GetComponent<Image>().sprite;
+
                 goesLeft = false;
             }
         }
@@ -192,12 +199,16 @@ public class Inventory : MonoBehaviour
             if (number >= 1)
             {
                 craftZoneRight.sprite = slotToCraft.GetComponent<Image>().sprite;
+
                 goesLeft = true;
 
             }
         }
     }
 
+    /// <summary>
+    /// Empty the craft zone, decrements the correct ressources and adds the new ressource to the inventory
+    /// </summary>
     public void CraftInitiated()
     {
         foreach (Image selection in tabSelection)
@@ -224,7 +235,9 @@ public class Inventory : MonoBehaviour
             {
                 text = slot.GetComponentInChildren(typeof(TMP_Text)) as TMP_Text;
                 text.text = (Convert.ToInt32(text.text) - 1).ToString();
+
                 ressourcesNameNumber[nameLeft] = Convert.ToInt32(text.text);
+
                 craftZoneLeft.sprite = null;
             }
 
@@ -232,21 +245,28 @@ public class Inventory : MonoBehaviour
             {
                 text = slot.GetComponentInChildren(typeof(TMP_Text)) as TMP_Text;
                 text.text = (Convert.ToInt32(text.text) - 1).ToString();
+
                 ressourcesNameNumber[nameRight] = Convert.ToInt32(text.text);
+
                 craftZoneRight.sprite = null;
 
                 indexRessource = cptRecipe;
+
                 CollectResource();
 
                 craftZoneResult.sprite = null;
             }
         }
 
-        SfxManager.instance.audio.PlayOneShot(SfxManager.instance.drop);
+        SfxManager.instance.GetComponent<AudioSource>().PlayOneShot(SfxManager.instance.drop);
 
         isCorrectRecipe = false;
         button.interactable = false;
     }
+
+    /// <summary>
+    /// Pick up a ressources
+    /// </summary>
     public void CollectResource()
     {
         // Check if a ressource is picked up
@@ -289,7 +309,8 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                // If the ressource has already been added in the past, increments the number of the said ressource by one. The max is 99.
+                // If the ressource has already been added in the past, increments the number of the said ressource by one.
+                // The max is 99.
 
                 if (!(ressourcesNameNumber[ressourcesName[indexRessource]] >= 99))
                 {
@@ -312,7 +333,7 @@ public class Inventory : MonoBehaviour
                     GameObject childPlane;
                     childPlane = tabSelection[index].transform.Find("Plane").gameObject;
 
-                    UnityEngine.UI.Image slot = childPlane.GetComponentInChildren<UnityEngine.UI.Image>();
+                    Image slot = childPlane.GetComponentInChildren<UnityEngine.UI.Image>();
 
                     text = slot.GetComponentInChildren(typeof(TMP_Text)) as TMP_Text;
 
@@ -321,7 +342,6 @@ public class Inventory : MonoBehaviour
                     alreadyAdded = false;
                 }
             }
-
             indexRessource = -1;
         }
     }

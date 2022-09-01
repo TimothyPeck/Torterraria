@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
-using System.Threading.Tasks;
 
 public class TerrainGeneration : MonoBehaviour
 {
@@ -10,18 +7,22 @@ public class TerrainGeneration : MonoBehaviour
     /// The grass type to be used
     /// </summary>
     public GameObject grassType = null;
+
     /// <summary>
     /// The dirt type to be used
     /// </summary>
     public GameObject dirtType = null;
+
     /// <summary>
     /// The stone type to be used
     /// </summary>
     public GameObject stoneType = null;
+
     /// <summary>
     /// The iron type to be used
     /// </summary>
     public GameObject ironType = null;
+
     /// <summary>
     /// The platform type to be used
     /// </summary>
@@ -30,24 +31,29 @@ public class TerrainGeneration : MonoBehaviour
     public GameObject superDirtType = null;
     public GameObject superStoneType = null;
     public GameObject superWoodType = null;
+
     /// <summary>
     /// The trees to be used
     /// </summary>
     public GameObject[] trees;
+
     /// <summary>
     /// The x coordinates that have already been done, avoids overlaps
     /// </summary>
     private List<float> usedX = new List<float>();
+
     /// <summary>
     /// The coordinates at which the trees will appear
     /// </summary>
     private List<int> treesX = new List<int>();
+
     /// <summary>
     /// The minimum spacing between the trees
     /// </summary>
     private int treeSpacing = 5;
+
     /// <summary>
-    /// 
+    /// Disables the possibility blocks to be placed at the same location
     /// </summary>
     public static bool[][] filledPositions = new bool[2 * GameManager.WIDTH][];
 
@@ -57,6 +63,7 @@ public class TerrainGeneration : MonoBehaviour
         for (int i = -GameManager.WIDTH; i < GameManager.WIDTH; i++)
         {
             filledPositions[i + GameManager.WIDTH] = new bool[2 * GameManager.HEIGHT];
+
             for (int j = -GameManager.HEIGHT; j < GameManager.HEIGHT; j++)
             {
                 filledPositions[i + GameManager.WIDTH][j + GameManager.HEIGHT] = false;
@@ -65,11 +72,13 @@ public class TerrainGeneration : MonoBehaviour
 
         // Modified version of https://www.youtube.com/watch?v=fHZGJuRfDUs
         Transform groundTransform = GameObject.Find("Ground").transform;
+
         // Gets random positions for trees.
         for(int i = 0; i < GameManager.WIDTH / treeSpacing; i++)
         {
             treesX.Add(GetRandomNumber(-GameManager.WIDTH + treeSpacing * 2, GameManager.WIDTH - treeSpacing));
         }
+
         //Goes from as far left to as far right as possible
         for (int i = -GameManager.WIDTH; i < GameManager.WIDTH; i++)
         {
@@ -84,7 +93,9 @@ public class TerrainGeneration : MonoBehaviour
                     GameObject bx;
                     bx = GameObject.Instantiate(superDirtType);
                     bx.name = "superDirt_" + GameManager.cpt;
+
                     GameManager.cpt++;
+
                     bx.transform.parent = groundTransform;
                     bx.tag = "SuperDirt";
                     bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
@@ -99,7 +110,9 @@ public class TerrainGeneration : MonoBehaviour
                     GameObject bx;
                     bx = GameObject.Instantiate(superStoneType);
                     bx.name = "superStone_" + GameManager.cpt;
+
                     GameManager.cpt++;
+
                     bx.transform.parent = groundTransform;
                     bx.tag = "SuperStone";
                     bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
@@ -114,7 +127,9 @@ public class TerrainGeneration : MonoBehaviour
                     GameObject bx;
                     bx = GameObject.Instantiate(superWoodType);
                     bx.name = "superWood_" + GameManager.cpt;
+
                     GameManager.cpt++;
+
                     bx.transform.parent = groundTransform;
                     bx.tag = "SuperWood";
                     bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
@@ -129,6 +144,7 @@ public class TerrainGeneration : MonoBehaviour
                 for (int j = yPosition; j > -GameManager.HEIGHT; j--)
                 {
                     GameObject bx;
+
                     // Randomly creates iron in the stone level.
                     if (j < -50 && j <= UnityEngine.Random.Range(-GameManager.HEIGHT, yPosition) * 10 && xPosition / 10 <= UnityEngine.Random.Range(-GameManager.WIDTH, GameManager.WIDTH) * 100)
                     {
@@ -156,14 +172,18 @@ public class TerrainGeneration : MonoBehaviour
 
                     // Adds to parent.
                     bx.transform.parent = groundTransform;
+
                     // Adds tag to make it breakable
                     bx.tag = "Ground";
+
                     GameManager.cpt++;
+
                     // Moves the block to the correct location.
                     bx.transform.position = new Vector3((float)xPosition, (float)j, 0f);
 
                     filledPositions[xPosition + GameManager.WIDTH][yPosition + GameManager.HEIGHT] = true;
                 }
+
                 // Adds the used position so as to not use it again.
                 usedX.Add(xPosition);
 

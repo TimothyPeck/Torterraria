@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class movePlayer : MonoBehaviour
+public class MovePlayer : MonoBehaviour
 {
     public float baseSpeed = 5f;
 
@@ -8,22 +8,21 @@ public class movePlayer : MonoBehaviour
 
     public GameObject healthBar;
 
-    private bool m_walk = false;
     private bool isFacingRight = true;
 
+    private float lastCollision;
     private float moveSpeed;
     private float jumpForce = 5;
 
-    // eject
-    private float lastCollision;
     private const float ejectDuration = 0.5f;
+
+    private Vector2 collisionDirection;
+
     private Vector3 moveVector;
 
     private Rigidbody rb;
 
     private Player player;
-
-    private Vector2 collisionDirection;
 
     // Start is called before the first frame update
     void Start()

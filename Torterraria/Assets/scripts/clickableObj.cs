@@ -3,25 +3,16 @@
  * Rattus 2021
  * He-Arc P2 SP 2021
  */
+
 // Reusing old scripts, Tim
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-public class clickableObj : MonoBehaviour
+public class ClickableObj : MonoBehaviour
 {
-    /*
-    public Transform[] objclickable;
-
-    public Transform Objreturn;
-    */
     private static GameObject lastClicked;
-    private static int mouseButton = -1;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
+    private static int mouseButton = -1;
 
     // Update is called once per frame
     void Update()
@@ -41,6 +32,7 @@ public class clickableObj : MonoBehaviour
     void FindClickedObj()
     {
         RaycastHit hit;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 100.0f))
@@ -48,7 +40,6 @@ public class clickableObj : MonoBehaviour
             if (hit.transform.gameObject != null)
             {
                 lastClicked = (hit.transform.gameObject);
-                //PrintName(hit.transform.gameObject);
             }
         }
     }
@@ -70,10 +61,5 @@ public class clickableObj : MonoBehaviour
     public static void ResetMouseButton()
     {
         mouseButton = -1;
-    }
-
-    void PrintName(GameObject go)
-    {
-        print(go.name);
     }
 }
