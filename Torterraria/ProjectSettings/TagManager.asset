@@ -12,6 +12,7 @@ TagManager:
   - SuperDirt
   - SuperStone
   - SuperWood
+  - WeaponImage
   layers:
   - Default
   - TransparentFX

@@ -49,7 +49,7 @@ public class BlockBreaking : MonoBehaviour
         //If the player has clicked an object
         if (lastClicked != null && canvas.GetComponent<Inventory>().CanvasObject.enabled == false)
         {
-            if (lastClicked.name == "Boss")
+            if (lastClicked.name == "Boss" && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 8f)
             {
                 int cpt = 0;
 

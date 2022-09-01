@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -161,7 +162,7 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// CHange the selected item
+    /// Change the selected item
     /// </summary>
     /// <param name="number"></param>
     public void ClickedSlot(int number)
@@ -174,7 +175,19 @@ public class Inventory : MonoBehaviour
         }
 
         tabSelection[number].enabled = true;
-    }
+
+        int cpt = 0;
+        foreach(string key in ressourcesNameNumber.Keys)
+        {
+            if(cpt == selectedRessource)
+            {
+                GameObject.FindGameObjectWithTag("WeaponImage").GetComponent<Image>().enabled = true;
+                GameObject.FindGameObjectWithTag("WeaponImage").GetComponent<Image>().sprite = tabSprites[ressourcesName.IndexOf(key)];
+            }
+            cpt++;
+        }
+
+    }   
 
     /// <summary>
     /// Put the wanted item in the correct craft slot

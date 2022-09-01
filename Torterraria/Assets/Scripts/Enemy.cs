@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     private float speedX;
     private float timeSpent;
     private float lastJump;
-    private float spawnTime;
     private float lastCollision;
 
     private const float ejectDuration = 0.5f;
@@ -45,7 +44,6 @@ public class Enemy : MonoBehaviour
 
         h.health = h.baseHealth;
 
-        spawnTime = Time.time;
         lastJump = Time.time;
 
         bossAlreadySeen = false;
