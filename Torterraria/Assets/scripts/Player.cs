@@ -63,11 +63,6 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.enabled = true;
         }
-
-        if (Input.GetKeyDown("q"))
-        {
-            PlayerHit(h.baseHealth / 2);
-        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -76,9 +71,9 @@ public class Player : MonoBehaviour
         {
             // Add the item picked up to the inventory
             int cpt = 0;
+            string[] collisionName = collision.gameObject.name.Split("_");
             foreach (string ressource in Inventory.ressourcesName)
             {
-                string[] collisionName = collision.gameObject.name.Split("_");
                 if (ressource == collisionName[0])
                 {
                     Inventory.indexRessource = cpt;
@@ -86,7 +81,10 @@ public class Player : MonoBehaviour
                 }
                 cpt++;
             }
-
+            if (collisionName[0] == "crown")
+            {
+                Debug.Log("GAGNEEEEEEEEEEEEEEEE");
+            }
             GameObject.Destroy(collision.gameObject);
         }
         

@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
     private float lastCollision;
     private const float ejectDuration = 0.5f;
 
+    private bool bossAlreadySeen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,8 @@ public class Enemy : MonoBehaviour
 
         spawnTime = Time.time;
         lastJump = Time.time;
+
+        bossAlreadySeen = false;
 
     }
 
@@ -67,8 +71,12 @@ public class Enemy : MonoBehaviour
         float distance = Vector2.Distance(gameObject.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
         float distanceX = Mathf.Abs(gameObject.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x);
         float distanceY = GameObject.FindGameObjectWithTag("Player").transform.position.y - gameObject.transform.position.y;
-
-        if (Mathf.Abs(distance) > 55f) // if too far away from the player, disappear forever
+        if (distance < 15f && name == "Boss" && bossAlreadySeen == false)
+        {
+            Debug.Log("OMG UN TORTIPOUSS!!!");
+            bossAlreadySeen = true;
+        }
+        if (distance > 55f && name != "Boss") // if too far away from the player, disappear forever
         {
             GameManager.EnemyKilled();
             GameObject.Destroy(gameObject);
@@ -102,12 +110,12 @@ public class Enemy : MonoBehaviour
                 default:
                     break;
             }
-            if (distanceY > 1f && Time.time - lastJump > 2f)
+            if ((distanceY > 0.7f || name == "Boss") && Time.time - lastJump > 2f)
             {
                 lastJump = Time.time;
                 forceY += 5;
             }
-            if (distanceX > 0.7f) // if close enough, run to the player
+            if (distanceX > 0.5f) // if close enough, run to the player
             {
                 float i = gameObject.transform.position.x > GameObject.FindGameObjectWithTag("Player").transform.position.x ? -1 : 1;
                 forceX = i * speed + collisionForce.x;
@@ -145,7 +153,7 @@ public class Enemy : MonoBehaviour
             GameManager.EnemyKilled();
             if (Random.value < dropRate)
             {
-                GameObject.Instantiate(lootToDrop, gameObject.transform.position, Quaternion.identity);
+                GameObject.Instantiate(lootToDrop, gameObject.transform.position + new Vector3(0, 0, -0.4f), Quaternion.identity);
             }
 
             SfxManager.instance.audio.PlayOneShot(SfxManager.instance.enemyDeath);

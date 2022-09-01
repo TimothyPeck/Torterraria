@@ -59,6 +59,22 @@ public class BlockBreaking : MonoBehaviour
         //If the player has clicked an object
         if (lastClicked != null && canvas.GetComponent<Inventory>().CanvasObject.enabled == false)
         {
+            if (lastClicked.name == "Boss")
+            {
+                int cpt = 0;
+
+                foreach (var ressource in Inventory.ressourcesNameNumber)
+                {
+                    if (cpt == Inventory.selectedRessource)
+                    {
+                        if (ressource.Key == "legendarySword")
+                        {
+                            lastClicked.GetComponent<Enemy>().GettingAttacked(1);
+                        }
+                    }
+                    cpt++;
+                }
+            }
             // Makes sure the shovel is selected to break super dirt
             if (lastClicked.tag == "SuperDirt")
             {
@@ -181,7 +197,7 @@ public class BlockBreaking : MonoBehaviour
                 DropBlock(lastClicked);
             }
             //Checks if the click object is an enemy, if yes deal damage.
-            else if (lastClicked.tag == "Enemy" && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 5 && mouseButton == 0)
+            else if (lastClicked.name != "Boss" && lastClicked.tag == "Enemy" && Vector2.Distance(lastClicked.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < 5 && mouseButton == 0)
             {
                 lastClicked.GetComponent<Enemy>().GettingAttacked(1);
             }

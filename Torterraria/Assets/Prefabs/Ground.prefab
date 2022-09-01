@@ -293,20 +293,10 @@ MonoBehaviour:
   ironType: {fileID: 1759274702677670701}
   grassType: {fileID: 1759274702056280898}
   dirtType: {fileID: 1759274702559248100}
-  legendarySwordType: {fileID: 0}
-  legendaryAxeType: {fileID: 0}
-  legendaryPickaxeType: {fileID: 0}
-  legendaryShowelType: {fileID: 0}
   enemy1Type: {fileID: 4208596667563132856, guid: 5b995763d764fc84880bd33ac65d6d2e, type: 3}
   enemy2Type: {fileID: 3132395302062843199, guid: ec49b936913529345bdee3c9018122d9, type: 3}
   enemy3Type: {fileID: 0}
   enemy4Type: {fileID: 0}
-  swordType: {fileID: 0}
-  axeType: {fileID: 0}
-  pickaxeType: {fileID: 0}
-  showelType: {fileID: 0}
-  plankType: {fileID: 0}
-  crownType: {fileID: 0}
   canvas: {fileID: 0}
   platformType: {fileID: 4142806038126979215, guid: ffa106a9b75b4ed4e80e5d355ed73450, type: 3}
 --- !u!1 &1759274702056280898

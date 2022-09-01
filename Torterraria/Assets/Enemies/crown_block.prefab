@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5452556856262192325}
   - component: {fileID: 84583170680367678}
   m_Layer: 0
-  m_Name: boss_block
+  m_Name: crown_block
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

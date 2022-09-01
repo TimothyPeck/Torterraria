@@ -16,10 +16,6 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 575178724698023975, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
-      propertyPath: dropRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 575178724698023975, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: lootToDrop
       value: 
       objectReference: {fileID: 3132395302062843199, guid: 20d0b8e55a46d1941b4fae5683c2c0eb, type: 3}
