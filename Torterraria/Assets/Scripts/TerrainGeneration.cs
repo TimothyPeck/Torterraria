@@ -74,7 +74,7 @@ public class TerrainGeneration : MonoBehaviour
         Transform groundTransform = GameObject.Find("Ground").transform;
 
         // Gets random positions for trees.
-        for(int i = 0; i < GameManager.WIDTH / treeSpacing; i++)
+        for (int i = 0; i < GameManager.WIDTH / treeSpacing; i++)
         {
             treesX.Add(GetRandomNumber(-GameManager.WIDTH + treeSpacing * 2, GameManager.WIDTH - treeSpacing));
         }
@@ -120,7 +120,7 @@ public class TerrainGeneration : MonoBehaviour
                     filledPositions[xPosition + GameManager.WIDTH][j + GameManager.HEIGHT] = true;
                 }
             }
-            else if (xPosition >75 && xPosition < 80)
+            else if (xPosition > 75 && xPosition < 80)
             {
                 for (int j = GameManager.HEIGHT - 1; j > -GameManager.HEIGHT; j--)
                 {
@@ -227,9 +227,9 @@ public class TerrainGeneration : MonoBehaviour
         ceiling.GetComponent<Renderer>().enabled = false;
         ceiling.transform.localScale = new Vector3(GameManager.WIDTH * 2, 1, 1);
         ceiling.transform.position = new Vector3(0, GameManager.HEIGHT, 0f);
-    
+
         // Creates an invisible wall on the left hand side of the map so that the player may never leave.
-        GameObject wallLeft=GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject wallLeft = GameObject.CreatePrimitive(PrimitiveType.Cube);
         wallLeft.transform.parent = groundTransform;
         wallLeft.name = "WallLeft";
         wallLeft.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
