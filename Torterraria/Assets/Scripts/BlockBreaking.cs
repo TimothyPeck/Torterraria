@@ -82,7 +82,7 @@ public class BlockBreaking : MonoBehaviour
                         if (ressource.Key == "legendaryShovel")
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
-                            
+
                             GameObject.Destroy(lastClicked.gameObject);
                         }
                         else
@@ -95,7 +95,7 @@ public class BlockBreaking : MonoBehaviour
                 }
             }
             // Makes sure the pickaxe is selected to break super stone
-            else if(lastClicked.tag == "SuperStone")
+            else if (lastClicked.tag == "SuperStone")
             {
                 if (Inventory.indexRessource == -1)
                 {
@@ -190,7 +190,7 @@ public class BlockBreaking : MonoBehaviour
                 }
 
                 TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
-                
+
                 DropBlock(lastClicked);
             }
             //Checks if the click object is an enemy, if yes deal damage.
@@ -216,7 +216,9 @@ public class BlockBreaking : MonoBehaviour
                 {
                     // The hit location transformed into a 3D vector.
                     Vector3 hitVector = hit.point;
-
+                    int playerX = Mathf.RoundToInt(GameObject.FindGameObjectWithTag("Player").transform.position.x);
+                    int playerY = Mathf.RoundToInt(GameObject.FindGameObjectWithTag("Player").transform.position.y);
+                    bool playerPosIsBlockPos = (playerY == Mathf.RoundToInt(hitVector.y) || playerY + 1 == Mathf.RoundToInt(hitVector.y)) && playerX == Mathf.RoundToInt(hitVector.x);
                     //Checks that the point is within the confines of the world and that the player is close enough,
                     // also checks that the coordinates of the block haven't been filled already.
                     if (hit.point.x < GameManager.WIDTH &&
@@ -224,7 +226,8 @@ public class BlockBreaking : MonoBehaviour
                         hit.point.y < GameManager.HEIGHT &&
                         hit.point.y > -GameManager.HEIGHT &&
                         Vector2.Distance(hitVector, GameObject.FindGameObjectWithTag("Player").transform.position) < 6 &&
-                        TerrainGeneration.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT] == false)
+                        TerrainGeneration.filledPositions[(int)hit.point.x + GameManager.WIDTH][(int)hit.point.y + GameManager.HEIGHT] == false &&
+                        !playerPosIsBlockPos)
                     {
                         GameObject cube = null;
 
@@ -319,7 +322,7 @@ public class BlockBreaking : MonoBehaviour
         }
 
         clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, Mathf.FloorToInt(clickedObject.transform.position.y), -0.4f);
-        
+
         // Leaves cannot be obtained and therefor cannot be dropped
         if (!clickedObject.name.Contains("leaves"))
         {
