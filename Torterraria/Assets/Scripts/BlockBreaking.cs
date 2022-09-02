@@ -83,7 +83,7 @@ public class BlockBreaking : MonoBehaviour
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
                             
-                            DropBlock(lastClicked);
+                            GameObject.Destroy(lastClicked.gameObject);
                         }
                         else
                         {
@@ -111,8 +111,8 @@ public class BlockBreaking : MonoBehaviour
                         if (ressource.Key == "legendaryPickaxe")
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
-                            
-                            DropBlock(lastClicked);
+
+                            GameObject.Destroy(lastClicked.gameObject);
                         }
                         else
                         {
@@ -140,8 +140,8 @@ public class BlockBreaking : MonoBehaviour
                         if (ressource.Key == "legendaryAxe")
                         {
                             TerrainGeneration.filledPositions[(int)lastClicked.transform.position.x + GameManager.WIDTH][(int)lastClicked.transform.position.y + GameManager.HEIGHT] = false;
-                            
-                            DropBlock(lastClicked);
+
+                            GameObject.Destroy(lastClicked.gameObject);
                         }
                         else
                         {
