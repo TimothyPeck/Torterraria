@@ -106,6 +106,8 @@ public class Player : MonoBehaviour
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
 
+            canvas.GetComponent<Inventory>().ClickedSlot(-1);
+
             GameObject.Destroy(collision.gameObject);
         }
         
