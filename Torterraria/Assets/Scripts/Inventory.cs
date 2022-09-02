@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
     public Image craftZoneRight;
     public Image craftZoneResult;
 
-    public Button button;
+    public Button buttonFusion;
 
     // Private
 
@@ -143,7 +143,7 @@ public class Inventory : MonoBehaviour
                             craftZoneResult.sprite = sprites;
 
                             isCorrectRecipe = true;
-                            button.interactable = true;
+                            buttonFusion.interactable = true;
                         }
 
                         cptRecipeTmp++;
@@ -157,7 +157,7 @@ public class Inventory : MonoBehaviour
         {
             craftZoneResult.sprite = null;
 
-            button.interactable = false;
+            buttonFusion.interactable = false;
         }
     }
 
@@ -274,7 +274,7 @@ public class Inventory : MonoBehaviour
         SfxManager.instance.GetComponent<AudioSource>().PlayOneShot(SfxManager.instance.drop);
 
         isCorrectRecipe = false;
-        button.interactable = false;
+        buttonFusion.interactable = false;
     }
 
     /// <summary>

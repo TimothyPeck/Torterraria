@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowHelp : MonoBehaviour
 {
     public Canvas helpCanvas = null;
 
-    private bool isShown = false;
+    public Button buttonHelp;
+    public Button buttonReturn;
 
     // Start is called before the first frame update
     void Start()
@@ -12,18 +14,11 @@ public class ShowHelp : MonoBehaviour
         helpCanvas.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// When button help or close is pressed
+    /// </summary>
+    public void NeedHelp()
     {
-        if (Input.GetKeyDown(KeyCode.F1) && !isShown)
-        {
-            isShown = true;
-            helpCanvas.enabled = isShown;
-        }
-        else if (Input.GetKeyDown(KeyCode.F1) && isShown)
-        {
-            isShown = false;
-            helpCanvas.enabled = isShown;
-        }
+        helpCanvas.enabled = !helpCanvas.enabled; 
     }
 }
