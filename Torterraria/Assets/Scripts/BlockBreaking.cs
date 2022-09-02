@@ -321,7 +321,7 @@ public class BlockBreaking : MonoBehaviour
             clickedObject = clickedObject.transform.parent.gameObject;
         }
 
-        clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, Mathf.FloorToInt(clickedObject.transform.position.y), -0.4f);
+        clickedObject.transform.position = new Vector3(clickedObject.transform.position.x, Mathf.FloorToInt(clickedObject.transform.position.y), -0.2f);
 
         // Leaves cannot be obtained and therefor cannot be dropped
         if (!clickedObject.name.Contains("leaves"))

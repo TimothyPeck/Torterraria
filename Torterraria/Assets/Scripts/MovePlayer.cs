@@ -86,7 +86,8 @@ public class MovePlayer : MonoBehaviour
             moveVector.y = rb.velocity.y;
         }
 
-        if (rb.velocity.magnitude > 0)
+        print(rb.velocity.magnitude);
+        if (rb.velocity.magnitude > 10e-1f)
         {
             animator.SetBool("isMoving", true);
         }
@@ -99,8 +100,8 @@ public class MovePlayer : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
-            healthBar.transform.localScale = healthBar.transform.localScale  * - 1;
-        }   
+            healthBar.transform.localScale = healthBar.transform.localScale * -1;
+        }
         else if (h < 0 && isFacingRight)
         {
             isFacingRight = !isFacingRight;
@@ -109,7 +110,7 @@ public class MovePlayer : MonoBehaviour
             transform.localScale = theScale;
             healthBar.transform.localScale = healthBar.transform.localScale * -1;
         }
-            
+
 
         //Sets the velocity of the rigidbody to a new vector with the current move vector
         rb.velocity = new Vector3(moveVector.x, moveVector.y);
@@ -126,5 +127,5 @@ public class MovePlayer : MonoBehaviour
         lastCollision = Time.time;
     }
 
-    
+
 }
