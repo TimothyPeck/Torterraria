@@ -186,7 +186,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3698815210076478684}
-  - component: {fileID: 3698815210076478683}
   - component: {fileID: 3698815210076478682}
   - component: {fileID: 3698815210076478681}
   - component: {fileID: 3698815210076478685}
@@ -194,6 +193,7 @@ GameObject:
   - component: {fileID: 3698815210076478656}
   - component: {fileID: -8644624114488219010}
   - component: {fileID: 6238365694143030718}
+  - component: {fileID: 6837528021996674511}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -218,19 +218,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3698815210076478683
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3698815210076478680}
-  m_Material: {fileID: 13400000, guid: b0c0ccea38d7bf348982b77debed156b, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.101499684, y: 0.12930901, z: 0.9}
-  m_Center: {x: -0.01283573, y: -0.01193589, z: 0}
 --- !u!212 &3698815210076478682
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -378,6 +365,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 3698815209783795158}
   health: {fileID: -8644624114488219010}
+--- !u!136 &6837528021996674511
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3698815210076478680}
+  m_Material: {fileID: 13400000, guid: b0c0ccea38d7bf348982b77debed156b, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.06
+  m_Height: 0.15
+  m_Direction: 1
+  m_Center: {x: -0.01283573, y: -0.01193589, z: 0}
 --- !u!1 &3698815211180237003
 GameObject:
   m_ObjectHideFlags: 0
