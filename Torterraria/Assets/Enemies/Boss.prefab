@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 458517798209059090, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: baseHealth
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 575178724698023975, guid: 3833c60d9c0166a4194ba98a20b86925, type: 3}
       propertyPath: speed

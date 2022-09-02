@@ -196,9 +196,11 @@ public class Enemy : MonoBehaviour
             return true;
             
         }
-
-        collisionDirection = (this.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position);
-        collisionDirection = collisionDirection / collisionDirection.magnitude * 8;
+        if(name != "Boss")
+        {
+            collisionDirection = (this.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position);
+            collisionDirection = collisionDirection / collisionDirection.magnitude * 8;
+        }
 
         lastCollision = Time.time;
 
