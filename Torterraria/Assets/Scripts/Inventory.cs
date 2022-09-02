@@ -282,6 +282,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public void CollectResource()
     {
+        alreadyAdded = false;
         // Check if a ressource is picked up
 
         if (indexRessource >= 0)
@@ -325,7 +326,7 @@ public class Inventory : MonoBehaviour
                 // If the ressource has already been added in the past, increments the number of the said ressource by one.
                 // The max is 99.
 
-                if (!(ressourcesNameNumber[ressourcesName[indexRessource]] >= 99))
+                if (!(ressourcesNameNumber[ressourcesName[indexRessource]] >= 99)) // <-- 
                 {
                     ressourcesNameNumber[ressourcesName[indexRessource]]++;
 
